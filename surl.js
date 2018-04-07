@@ -7,7 +7,6 @@
  */
  const program = require('commander');
  const chalk = require('chalk');
- const copy = require('copy-to-clipboard');
 
  const {expandUrl, shortenUrl} = require('./lib/ajax');
 
@@ -18,7 +17,7 @@ program
 .version('1.0.0', '-v, --version')
 .usage('<option> [url]')
 .description(`surl shortens the long url using ${chalk.bold('Google ShortenUrl api')} and ${chalk.bold('Bitly api')}`)
-.option('-r, --reverse', 'Expand url')
+.option('-r, --reverse', 'Expand the shortened url')
 .on('--help', function () {
     console.log();
     console.log(`  ${chalk.blueBright('surl [longUrl]')}`);
@@ -26,21 +25,15 @@ program
     console.log();
     console.log(`  ${chalk.blueBright('surl -r [shortUrl]')}`);
     console.log(`  ${chalk.blueBright('=> the expanded url is copied to clipboard [longUrl]')}`);
+})
+.action((url, options) => {
+    if (!options.reverse) {
+        shortenUrl(url);
+        
+    } else {
+        expandUrl(url);
+    }
 });
-
-
-// logic
-if (!program.options.reverse) {
-    let shortUrl = shortenUrl(program.argv);
-    copy(shortUrl);
-    console.log(`  ${chalk.blueBright('the shortened url is copied to clipboard ' + shortUrl)}`);
-
-} else {
-    let longUrl = expandUrl(program.argv);
-    copy(longUrl);
-    console.log(`  ${chalk.blueBright('the expanded url is copied to clipboard ' + longUrl)}`);
-
-}
 
 
 program.parse(process.argv);
