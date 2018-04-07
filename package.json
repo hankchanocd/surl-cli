@@ -1,0 +1,26 @@
+{
+  "name": "surl",
+  "version": "1.0.0",
+  "description": "A cli tool for shortening url",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hankchanocd/surl.git"
+  },
+  "keywords": [
+    "shortenUrl",
+    "url",
+    "cli",
+    "google",
+    "bitly"
+  ],
+  "author": "Hank Chan <hankchanth@icloud.com> (https://github.com/hankchanocd)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hankchanocd/surl/issues"
+  },
+  "homepage": "https://github.com/hankchanocd/surl#readme"
+}
