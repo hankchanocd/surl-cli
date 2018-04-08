@@ -60,7 +60,7 @@ function shortenUrl(input) {
 
       // Copy to clipboard
       copy(response.id);
-      console.log(`${chalk.blueBright('success! ' + response.id + ' copied to clipboard')}`);
+      console.log(`${chalk.blueBright('success! ' + chalk.white.underline(response.id) + ' copied to clipboard')}`);
     });
   
 }
