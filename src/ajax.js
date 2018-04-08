@@ -4,6 +4,8 @@
  const chalk = require('chalk');
  const fetch = require('fetch').fetchUrl;
  const copy = require('clipboardy').writeSync;
+ const columnify = require('columnify');
+ var ui = require('cliui')();
 
 // Include data for accessing Google APIs
 const apiKey = 'AIzaSyDtgAbFDs8HctoY1GMqe9s8CEPb86_Mlg8';
@@ -29,6 +31,7 @@ function expandUrl(input) {
       return console.log(chalk.redBright('ERROR:', response.error.message));
     }
 
+    // Copy to clipboard
     copy(response.longUrl);
     console.log(`${chalk.blueBright('success! expanded url copied to clipboard ')}`);
   });
@@ -55,13 +58,96 @@ function shortenUrl(input) {
         return console.log(chalk.redBright('ERROR:', response.error.message));
       }
 
+      // Copy to clipboard
       copy(response.id);
-      console.log(`${chalk.blueBright('success! shortened url copied to clipboard')}`);
+      console.log(`${chalk.blueBright('success! ' + response.id + ' copied to clipboard')}`);
     });
   
 }
 
+function stats(input) {
+  input += '&projection=FULL'; // stats identifier
+  const urlToExpand = url + '?shortUrl=' + input + '&key=' + apiKey;
+  fetch(urlToExpand, function(error, meta, body){
+
+    // Should a network error happen
+    if (error) {
+      return console.log(chalk.redBright('ERROR:', error.message || error));
+    }
+
+    let response = JSON.parse(body);
+
+    // Should a invalid url is sent
+    if (response.error) {
+      return console.log(chalk.redBright('ERROR:', response.error.message));
+    }
+
+    // Display analytics
+    console.log(`${chalk.grey('shortUrl:')} ${response.id}`);
+    console.log(`${chalk.grey('origin:')} ${response.longUrl}`);
+    console.log(`${chalk.grey('created:')} ${fullDate(response.created)}`);
+    console.log(`${chalk.grey('clicks:')}`);
+    console.log(summary(response.analytics));
+  });
+}
+
+
+// Helper methods
+
+function fullDate(date) {
+  let d = new Date(date);
+  return d.getFullYear() + ' ' + d.getMonth() + ' ' + d.getDate();
+}
+
+// Clicks summary
+function summary(analytics) {
+  ui.div({
+    text: clicksPeriod(analytics),
+    width: 35,
+    padding: [0, 4, 0, 4]
+  },{
+    text: clicksCountries(analytics),
+    width: 25,
+    padding: [0, 4, 0, 4]
+  });
+  return ui.toString();
+}
+
+function clicksPeriod(analytics) {
+  let period = [{
+    period: 'allTime',
+    shortUrl: analytics.allTime.shortUrlClicks,
+    longUrl: analytics.allTime.longUrlClicks
+  }, {
+    period: 'month',
+    shortUrl: analytics.month.shortUrlClicks,
+    longUrl: analytics.month.longUrlClicks
+  }, {
+    period: 'week',
+    shortUrl: analytics.week.shortUrlClicks,
+    longUrl: analytics.week.longUrlClicks
+  }, {
+    period: 'day',
+    shortUrl: analytics.day.shortUrlClicks,
+    longUrl: analytics.day.longUrlClicks
+  }, {
+    period: 'twoHours',
+    shortUrl: analytics.twoHours.shortUrlClicks,
+    longUrl: analytics.twoHours.longUrlClicks
+  }];
+
+  return columnify(period);
+}
+
+function clicksCountries(analytics) {
+  let countries = analytics.allTime.countries;
+  countries = countries.map((obj) => {return {countries: obj.id, count: obj.count}});
+  return columnify(countries);
+}
+
+
 module.exports = {
   expandUrl: expandUrl,
-  shortenUrl: shortenUrl
+  shortenUrl: shortenUrl,
+  stats: stats
 }
