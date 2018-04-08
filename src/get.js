@@ -3,15 +3,14 @@
  */
  const chalk = require('chalk');
  const fetch = require('fetch').fetchUrl;
+ const Conf = require('conf');
  const copy = require('clipboardy').writeSync;
  const columnify = require('columnify');
- var ui = require('cliui')();
+ const ui = require('cliui')();
 
 // Include data for accessing Google APIs
-const apiKey = 'AIzaSyDtgAbFDs8HctoY1GMqe9s8CEPb86_Mlg8';
+const apiKey = new Conf().get('key');
 const url = 'https://www.googleapis.com/urlshortener/v1/url';
-
-// Include data for accessing Bitly APIs
 
 
 // AJAX functions using features from SE7 SE8
