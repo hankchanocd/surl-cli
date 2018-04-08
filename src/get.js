@@ -33,7 +33,7 @@ function expandUrl(input) {
 
     // Copy to clipboard
     copy(response.longUrl);
-    console.log(`${chalk.blueBright('success! expanded url copied to clipboard ')}`);
+    console.log(`${chalk.green('success! expanded url copied to clipboard ')}`);
   });
 
 }
@@ -60,7 +60,7 @@ function shortenUrl(input) {
 
       // Copy to clipboard
       copy(response.id);
-      console.log(`${chalk.blueBright('success! ' + chalk.white.underline(response.id) + ' copied to clipboard')}`);
+      console.log(`${chalk.green('success! ' + chalk.white.underline(response.id) + ' copied to clipboard')}`);
     });
   
 }
@@ -146,8 +146,8 @@ function clicksCountries(analytics) {
 }
 
 
-module.exports = {
-  expandUrl: expandUrl,
-  shortenUrl: shortenUrl,
-  stats: stats
-}
+export {
+  expandUrl,
+  shortenUrl,
+  stats
+};

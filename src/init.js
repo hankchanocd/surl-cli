@@ -5,8 +5,7 @@
  const Conf = require('conf');
  const conf = new Conf();
 
- module.exports = {
-  inquire: () => {
+ function inquire() {
     let questions = [
     {
       type: 'list',
@@ -44,7 +43,6 @@
       console.log('saved');
     });
   }
-}
 
 function storeShortcutConfiguration() {
   if (conf.get('provider') === 'google') {
@@ -55,4 +53,8 @@ function storeShortcutConfiguration() {
     conf.set('providerUrl', 'https://www.googleapis.com/urlshortener/v1/url');
     conf.set('key', conf.get('bitly_key'));
   }
+}
+
+module.exports = {
+  inquire
 }
