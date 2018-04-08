@@ -8,16 +8,17 @@
  const program = require('commander');
  const chalk = require('chalk');
 
- const {expandUrl, shortenUrl, stats} = require('./lib/ajax');
+ const {expandUrl, shortenUrl, stats} = require('./lib/get');
  const config = require('./lib/config');
+ const init = require('./lib/init');
 
 // This program is a lightweight cli tool for shortening url using various api providers, 
 // including but not limited to Google, Bitly
 
 program
 .version('1.0.0', '-v, --version')
-.usage('<option> <url>')
-.description(`surl shortens the long url using ${chalk.bold('Google ShortenUrl api')} and ${chalk.bold('Bitly api')}`)
+.usage('[option] [url]')
+.description(`surl shortens long urls using ${chalk.bold('Google ShortenUrl api')} and ${chalk.bold('Bitly api')}`)
 .option('-r, --reverse', 'expand the shortened url')
 .option('-s, --stats', "display a shortUrl's analytics")
 .on('--help', function () {
@@ -33,6 +34,7 @@ program
     console.log(`  ${chalk.blueBright('=> success! expanded url copied to clipboard')}`);
     console.log();
     console.log(`  ${chalk.blueBright('surl --stats [shortUrl]')}`);
+    console.log(`  ${chalk.blueBright('=> shortUrl: http://goo.gl/fbsS\n     origin: http://www.google.com/\n     created: 2009 11 12')}`);
     console.log();
 })
 .action((url, options) => {
@@ -43,8 +45,11 @@ program
     } else if (options.stats) {
         stats(url);
 
-    } else if (options.config) {
-        config();
+    } else if (process.argv[2] === 'init') {
+        init.inquire();
+
+    } else if (process.argv[2] === 'config') {
+        config.inquire();
 
     } else {
         shortenUrl(url);
@@ -52,7 +57,6 @@ program
 });
 
 program.parse(process.argv);
-
 
 
 

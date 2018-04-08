@@ -8,9 +8,10 @@
  const columnify = require('columnify');
  const ui = require('cliui')();
 
-// Include data for accessing Google APIs
-const apiKey = new Conf().get('key');
-const url = 'https://www.googleapis.com/urlshortener/v1/url';
+// Retrieve data from configurations for accessing the preferred API provider
+const conf = new Conf();
+const apiKey = conf.get('key');
+const url = conf.get('providerUrl');
 
 
 // AJAX functions using features from SE7 SE8
