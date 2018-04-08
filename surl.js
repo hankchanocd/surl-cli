@@ -23,18 +23,21 @@ program
 .option('-s, --stats', "display a shortUrl's analytics")
 .on('--help', function () {
     console.log();
-    console.log('  Please provide configurations for api providers and api keys first before using surl');
-    console.log(`  ${chalk.blueBright('surl --config')}`);
+    console.log('  Please initiate configuration for api providers and api keys before start using surl');
+    console.log(`  ${chalk.blueBright('surl init')}`);
+    console.log();
+    console.log(`  You can later modify configuration using`);
+    console.log(`  ${chalk.blueBright('surl config')}`);
     console.log();
     console.log('  Examples:');
     console.log(`  ${chalk.blueBright('surl [longUrl]')}`);
-    console.log(`  ${chalk.blueBright('=> success! [shortened url] copied to clipboard')}`);
+    console.log(`  ${chalk.green('=> success! [shortened url] copied to clipboard')}`);
     console.log();
     console.log(`  ${chalk.blueBright('surl -r [shortUrl]')}`);
-    console.log(`  ${chalk.blueBright('=> success! expanded url copied to clipboard')}`);
+    console.log(`  ${chalk.green('=> success! expanded url copied to clipboard')}`);
     console.log();
     console.log(`  ${chalk.blueBright('surl --stats [shortUrl]')}`);
-    console.log(`  ${chalk.blueBright('=> shortUrl: http://goo.gl/fbsS\n     origin: http://www.google.com/\n     created: 2009 11 12')}`);
+    console.log(`  ${chalk.green('=> shortUrl: http://goo.gl/fbsS\n     origin: http://www.google.com/\n     created: 2009 11 12')}`);
     console.log();
 })
 .action((url, options) => {
