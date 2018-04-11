@@ -96,11 +96,14 @@ function stats(input) {
 
 function fullDate(date) {
   let d = new Date(date);
-  return d.getFullYear() + ' ' + d.getMonth() + ' ' + d.getDate();
+  return d.getFullYear() + ' ' + (d.getMonth() + 1) + ' ' + d.getDate();
 }
 
 // Clicks summary
 function summary(analytics) {
+
+  if (!analytics) {return chalk.grey('clicks data NaN');}
+
   ui.div({
     text: clicksPeriod(analytics),
     width: 35,
@@ -114,35 +117,40 @@ function summary(analytics) {
 }
 
 function clicksPeriod(analytics) {
+
   let period = [{
     period: 'allTime',
-    shortUrl: analytics.allTime.shortUrlClicks,
-    longUrl: analytics.allTime.longUrlClicks
+    shortUrl: analytics.allTime.shortUrlClicks || chalk.grey('NaN'),
+    longUrl: analytics.allTime.longUrlClicks || chalk.grey('NaN')
   }, {
     period: 'month',
-    shortUrl: analytics.month.shortUrlClicks,
-    longUrl: analytics.month.longUrlClicks
+    shortUrl: analytics.month.shortUrlClicks || chalk.grey('NaN'),
+    longUrl: analytics.month.longUrlClicks || chalk.grey('NaN')
   }, {
     period: 'week',
-    shortUrl: analytics.week.shortUrlClicks,
-    longUrl: analytics.week.longUrlClicks
+    shortUrl: analytics.week.shortUrlClicks || chalk.grey('NaN'),
+    longUrl: analytics.week.longUrlClicks || chalk.grey('NaN')
   }, {
     period: 'day',
-    shortUrl: analytics.day.shortUrlClicks,
-    longUrl: analytics.day.longUrlClicks
+    shortUrl: analytics.day.shortUrlClicks || chalk.grey('NaN'),
+    longUrl: analytics.day.longUrlClicks || chalk.grey('NaN')
   }, {
     period: 'twoHours',
-    shortUrl: analytics.twoHours.shortUrlClicks,
-    longUrl: analytics.twoHours.longUrlClicks
+    shortUrl: analytics.twoHours.shortUrlClicks || chalk.grey('NaN'),
+    longUrl: analytics.twoHours.longUrlClicks || chalk.grey('NaN')
   }];
 
   return columnify(period);
 }
 
 function clicksCountries(analytics) {
-  let countries = analytics.allTime.countries;
-  countries = countries.map((obj) => {return {countries: obj.id, count: obj.count}});
-  return columnify(countries);
+
+  if (analytics.allTime.countries) {
+    let countries = analytics.allTime.countries;
+    countries = countries.map((obj) => {return {countries: obj.id, count: obj.count};});
+    return columnify(countries);
+  }
+  return chalk.grey('Countries Data NaN');
 }
 
 
