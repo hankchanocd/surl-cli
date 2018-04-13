@@ -57,4 +57,4 @@ function storeShortcutConfiguration() {
 
 module.exports = {
   inquire
-}
+};

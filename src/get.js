@@ -14,7 +14,6 @@ const apiKey = conf.get('key');
 const url = conf.get('providerUrl');
 
 
-// AJAX functions using features from SE7 SE8
 function expandUrl(input) {
   const urlToExpand = url + '?shortUrl=' + input + '&key=' + apiKey;
   fetch(urlToExpand, function(error, meta, body){
