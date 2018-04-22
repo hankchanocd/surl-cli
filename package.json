@@ -4,7 +4,8 @@
   "description": "A cli tool for shortening url",
   "main": "surl.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
+    "test-coverage": "jscoverage lib lib-cov &&  mocha --reporter html-cov > code-coverage.html",
     "build": "babel src -d lib"
   },
   "bin": {
@@ -36,7 +37,8 @@
     "conf": "^1.4.0",
     "configstore": "^3.1.2",
     "fetch": "^1.1.0",
-    "inquirer": "^5.2.0"
+    "inquirer": "^5.2.0",
+    "mocha": "^5.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
