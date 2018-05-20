@@ -29,19 +29,19 @@
   },
   "homepage": "https://github.com/hankchanocd/surl#readme",
   "dependencies": {
-    "chalk": "^2.3.2",
+    "chalk": "^2.4.1",
     "clipboardy": "^1.2.3",
-    "cliui": "^4.0.0",
+    "cliui": "^4.1.0",
     "columnify": "^1.5.4",
     "commander": "^2.15.1",
     "conf": "^1.4.0",
     "configstore": "^3.1.2",
     "fetch": "^1.1.0",
     "inquirer": "^5.2.0",
-    "mocha": "^5.1.0"
+    "mocha": "^5.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1"
+    "babel-preset-env": "^1.7.0"
   }
 }
