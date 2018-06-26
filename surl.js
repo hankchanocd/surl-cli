@@ -7,7 +7,7 @@
  */
  const program = require('commander');
  const chalk = require('chalk');
-
+ 
  const {expandUrl, shortenUrl, stats} = require('./lib/get');
  const config = require('./lib/config');
  const init = require('./lib/init');

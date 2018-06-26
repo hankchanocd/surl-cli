@@ -1,12 +1,12 @@
 /*
  * modules
  */
- const chalk = require('chalk');
- const fetch = require('fetch').fetchUrl;
- const Conf = require('conf');
- const copy = require('clipboardy').writeSync;
- const columnify = require('columnify');
- const ui = require('cliui')();
+const chalk     = require('chalk');
+const fetch     = require('fetch').fetchUrl;
+const Conf      = require('conf');
+const copy      = require('clipboardy').writeSync;
+const columnify = require('columnify');
+const ui        = require('cliui')();
 
 // Retrieve data from configurations for accessing the preferred API provider
 const conf = new Conf();
@@ -16,7 +16,7 @@ const url = conf.get('providerUrl');
 
 function expandUrl(input) {
   const urlToExpand = url + '?shortUrl=' + input + '&key=' + apiKey;
-  fetch(urlToExpand, function(error, meta, body){
+  fetch(urlToExpand, function(error, meta, body) {
 
     // Should a network error happen
     if (error) {
@@ -39,11 +39,16 @@ function expandUrl(input) {
 
 function shortenUrl(input) {
   const urlWithKey = url + '?key=' + apiKey;
-  fetch(urlWithKey, 
-    {method: 'POST', 
-    payload: JSON.stringify({longUrl: input}),  // payload is body for options in fetch()
-    headers: {'Content-type': 'application/json'}},
-    function(error, meta, body){
+  fetch(urlWithKey, {
+      method: 'POST',
+      payload: JSON.stringify({
+        longUrl: input
+      }), // payload is body for options in fetch()
+      headers: {
+        'Content-type': 'application/json'
+      }
+    },
+    function(error, meta, body) {
 
       // Should a network error happen
       if (error) {
@@ -61,13 +66,13 @@ function shortenUrl(input) {
       copy(response.id);
       console.log(`${chalk.green('success! ' + chalk.white.underline(response.id) + ' copied to clipboard')}`);
     });
-  
+
 }
 
 function stats(input) {
   input += '&projection=FULL'; // stats identifier
   const urlToExpand = url + '?shortUrl=' + input + '&key=' + apiKey;
-  fetch(urlToExpand, function(error, meta, body){
+  fetch(urlToExpand, function(error, meta, body) {
 
     // Should a network error happen
     if (error) {
@@ -101,13 +106,15 @@ function fullDate(date) {
 // Clicks summary
 function summary(analytics) {
 
-  if (!analytics) {return chalk.grey('clicks data NaN');}
+  if (!analytics) {
+    return chalk.grey('clicks data NaN');
+  }
 
   ui.div({
     text: clicksPeriod(analytics),
     width: 35,
     padding: [0, 4, 0, 4]
-  },{
+  }, {
     text: clicksCountries(analytics),
     width: 25,
     padding: [0, 4, 0, 4]
@@ -146,7 +153,12 @@ function clicksCountries(analytics) {
 
   if (analytics.allTime.countries) {
     let countries = analytics.allTime.countries;
-    countries = countries.map((obj) => {return {countries: obj.id, count: obj.count};});
+    countries = countries.map((obj) => {
+      return {
+        countries: obj.id,
+        count: obj.count
+      };
+    });
     return columnify(countries);
   }
   return chalk.grey('Countries Data NaN');

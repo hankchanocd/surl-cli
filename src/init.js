@@ -1,13 +1,12 @@
-/* 
+/*
  * modules
  */
- const inquirer = require('inquirer');
- const Conf = require('conf');
- const conf = new Conf();
+const inquirer = require('inquirer');
+const Conf     = require('conf');
+const conf     = new Conf();
 
- function inquire() {
-    let questions = [
-    {
+function inquire() {
+  let questions = [{
       type: 'list',
       name: 'provider',
       message: "Your URL shortener api provider",
@@ -32,17 +31,17 @@
         return conf.get('bitly_key');
       }
     }
-    ];
+  ];
 
-    inquirer.prompt(questions).then(answers => {
-      conf.set('provider', answers.provider);
-      conf.set('google_key', answers.google_key);
-      conf.set('bitly_key', answers.bitly_key);
-      storeShortcutConfiguration();
+  inquirer.prompt(questions).then(answers => {
+    conf.set('provider', answers.provider);
+    conf.set('google_key', answers.google_key);
+    conf.set('bitly_key', answers.bitly_key);
+    storeShortcutConfiguration();
 
-      console.log('saved');
-    });
-  }
+    console.log('saved');
+  });
+}
 
 function storeShortcutConfiguration() {
   if (conf.get('provider') === 'google') {
