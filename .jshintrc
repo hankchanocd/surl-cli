@@ -1,0 +1,17 @@
+{
+    "undef": false,
+    "unused": true,
+    "freeze": true,
+    "globals": {
+        "MY_GLOBAL": true,
+        "EventEmitter": true,
+        "Promise": true
+    },
+    "moz": true,
+    "boss": true,
+    "node": true,
+    "validthis": true,
+    "maxdepth": 4,
+    "esversion": 6,
+    "esnext": false
+}
