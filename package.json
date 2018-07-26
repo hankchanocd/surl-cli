@@ -33,7 +33,7 @@
     "clipboardy": "^1.2.3",
     "cliui": "^4.1.0",
     "columnify": "^1.5.4",
-    "commander": "^2.15.1",
+    "commander": "^2.16.0",
     "conf": "^1.4.0",
     "configstore": "^3.1.2",
     "fetch": "^1.1.0",
@@ -41,7 +41,6 @@
     "mocha": "^5.2.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0"
   }
 }
