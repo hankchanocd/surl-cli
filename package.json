@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha",
     "test-coverage": "jscoverage lib lib-cov &&  mocha --reporter html-cov > code-coverage.html",
-    "build": "babel src -d lib"
+    "build": "babel ./src -d ./build"
   },
   "bin": {
     "surl": "./surl.js"
