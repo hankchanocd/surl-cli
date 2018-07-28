@@ -7,21 +7,23 @@
 const { BitlyClient } = require('bitly');
 const copy = require('clipboardy').writeSync;
 const api = require('./lib/api.js');
+const util = require('./lib/util.js');
 
 // UI
 const chalk = require('chalk');
-const columnify = require('columnify');
-const ui = require('cliui')();
 
 // Configurations Retrieval
 const Conf = require('conf');
 const conf = new Conf();
 const defaultProvider = conf.get('defaultProvider');
 
+// Stats summary utility methods
+const googleSummary = require('./lib/stats/google-stats.js').summary;
+
 
 function expandUrl(input) {
 
-    switch (defaultProvider) {
+    switch (util.identifyAPIProvider(input)) {
         case 'bitly': // Use bitly API client
             let token = conf.get('bitly_key');
             const bitly = new BitlyClient(token);
@@ -52,7 +54,7 @@ function expandUrl(input) {
             return;
 
         default:
-            return console.log(' No provider is selected.');
+            return console.log(' Unable to detect provider from the link.');
     }
 
 }
@@ -96,105 +98,40 @@ function shortenUrl(longUrl) {
 
 function stats(input) {
 
-    switch (defaultProvider) {
-        case 'bitly':
+    switch (util.identifyAPIProvider(input)) {
+        case 'bitly': // Use bitly API client
+            let token = conf.get('bitly_key');
+            const bitly = new BitlyClient(token);
+
+            bitly
+                .countries(input)
+                .then(function(result) {
+                    console.log(result);
+                })
+                .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
             return;
 
-        case 'google':
+        case 'google': // Use self-made goo.gl API client
             let url = conf.get('providerUrl');
             input += '&projection=FULL'; // stats identifier
             let apiKey = conf.get('google_key');
-            const urlToExpand = url + '?shortUrl=' + input + '&key=' + apiKey;
+            const urlToAnalyze = url + '?shortUrl=' + input + '&key=' + apiKey;
 
-            api.get(urlToExpand)
+            api.get(urlToAnalyze)
                 .then(response => {
-
                     // Display analytics
-                    console.log(`${chalk.grey('shortUrl:')} ${response.id}`);
-                    console.log(`${chalk.grey('origin:')} ${response.longUrl}`);
-                    console.log(`${chalk.grey('created:')} ${fullDate(response.created)}`);
-                    console.log(`${chalk.grey('clicks:')}`);
-                    console.log(summary(response.analytics));
-
+                    googleSummary(response);
                 })
                 .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
             return;
 
         default:
-            return console.log(' No provider is selected.');
+            return console.log(' Unable to detect provider from the link.');
 
     }
 
 }
 
-
-/**** Helper methods ****/
-// Get full date
-function fullDate(date) {
-    let d = new Date(date);
-    return d.getFullYear() + ' ' + (d.getMonth() + 1) + ' ' + d.getDate();
-}
-
-// Clicks summary
-function summary(analytics) {
-
-    if (!analytics) {
-        return chalk.grey('clicks data NaN');
-    }
-
-    ui.div({
-        text: clicksPeriod(analytics),
-        width: 35,
-        padding: [0, 4, 0, 4]
-    }, {
-        text: clicksCountries(analytics),
-        width: 25,
-        padding: [0, 4, 0, 4]
-    });
-    return ui.toString();
-}
-
-function clicksPeriod(analytics) {
-
-    let period = [{
-        period: 'allTime',
-        shortUrl: analytics.allTime.shortUrlClicks || chalk.grey('NaN'),
-        longUrl: analytics.allTime.longUrlClicks || chalk.grey('NaN')
-    }, {
-        period: 'month',
-        shortUrl: analytics.month.shortUrlClicks || chalk.grey('NaN'),
-        longUrl: analytics.month.longUrlClicks || chalk.grey('NaN')
-    }, {
-        period: 'week',
-        shortUrl: analytics.week.shortUrlClicks || chalk.grey('NaN'),
-        longUrl: analytics.week.longUrlClicks || chalk.grey('NaN')
-    }, {
-        period: 'day',
-        shortUrl: analytics.day.shortUrlClicks || chalk.grey('NaN'),
-        longUrl: analytics.day.longUrlClicks || chalk.grey('NaN')
-    }, {
-        period: 'twoHours',
-        shortUrl: analytics.twoHours.shortUrlClicks || chalk.grey('NaN'),
-        longUrl: analytics.twoHours.longUrlClicks || chalk.grey('NaN')
-    }];
-
-    return columnify(period);
-}
-
-function clicksCountries(analytics) {
-
-    if (analytics.allTime.countries) {
-        let countries = analytics.allTime.countries;
-        countries = countries.map((obj) => {
-            return {
-                countries: obj.id,
-                count: obj.count
-            };
-        });
-        return columnify(countries);
-    }
-    return chalk.grey('COUNTRIES DATA NaN');
-}
 
 
 // Export module
