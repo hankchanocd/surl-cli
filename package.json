@@ -1,5 +1,5 @@
 {
-  "name": "surl",
+  "name": "surl-cli",
   "version": "1.0.0",
   "description": "A cli tool for shortening url",
   "main": "surl.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hankchanocd/surl.git"
+    "url": "git+https://github.com/hankchanocd/surl-cli.git"
   },
   "keywords": [
     "shortenUrl",
@@ -24,9 +24,9 @@
   "author": "Hank Chan <hankchanth@icloud.com> (https://github.com/hankchanocd)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hankchanocd/surl/issues"
+    "url": "https://github.com/hankchanocd/surl-cli/issues"
   },
-  "homepage": "https://github.com/hankchanocd/surl#readme",
+  "homepage": "https://github.com/hankchanocd/surl-cli#readme",
   "dependencies": {
     "chalk": "^2.4.1",
     "clipboardy": "^1.2.3",
