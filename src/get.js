@@ -4,76 +4,131 @@
  */
 
 // Dependencies
-const chalk = require('chalk');
-const Conf = require('conf');
+const { BitlyClient } = require('bitly');
 const copy = require('clipboardy').writeSync;
-const columnify = require('columnify');
-const ui = require('cliui')();
 const api = require('./lib/api.js');
 
+// UI
+const chalk = require('chalk');
+const columnify = require('columnify');
+const ui = require('cliui')();
 
-// Retrieve data from configurations for accessing the preferred API provider
+// Configurations Retrieval
+const Conf = require('conf');
 const conf = new Conf();
-const apiKey = conf.get('key');
-const url = conf.get('providerUrl');
+const defaultProvider = conf.get('defaultProvider');
 
 
 function expandUrl(input) {
-    const urlToExpand = url + '?shortUrl=' + input + '&key=' + apiKey;
 
-    api.get(urlToExpand)
-        .then(response => {
+    switch (defaultProvider) {
+        case 'bitly': // Use bitly API client
+            let token = conf.get('bitly_key');
+            const bitly = new BitlyClient(token);
 
-            // Should an invalid url is sent
-            if (response.error) {
-                return console.log(chalk.redBright('ERROR:', response.error.message));
-            }
+            bitly
+                .expand(input)
+                .then(function(result) {
+                    result = result.expand[0].long_url;
+                    // Copy to clipboard
+                    copy(result);
+                    console.log(`${chalk.green('success! ' + chalk.white.underline(result) + ' copied to clipboard')}`);
+                })
+                .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
+            return;
 
-            // Copy to clipboard
-            copy(response.longUrl);
-            console.log(`${chalk.green('success! expanded url copied to clipboard ')}`);
+        case 'google': // Use self-made goo.gl API client
+            let url = conf.get('providerUrl');
+            let apiKey = conf.get('google_key');
+            let urlToExpand = url + '?shortUrl=' + input + '&key=' + apiKey;
 
-        })
-        .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
+            api.get(urlToExpand)
+                .then(response => {
+                    // Copy to clipboard
+                    copy(response.longUrl);
+                    console.log(`${chalk.green('success! expanded url copied to clipboard ')}`);
+                })
+                .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
+            return;
+
+        default:
+            return console.log(' No provider is selected.');
+    }
 
 }
 
 function shortenUrl(longUrl) {
-    const urlWithKey = url + '?key=' + apiKey;
 
-    api.post(urlWithKey, longUrl)
-        .then(response => {
+    switch (defaultProvider) {
+        case 'bitly': // Use bitly API client
+            let token = conf.get('bitly_key');
+            const bitly = new BitlyClient(token);
 
-            // Copy to clipboard
-            copy(response.id);
-            console.log(`${chalk.green('success! ' + chalk.white.underline(response.id) + ' copied to clipboard')}`);
+            bitly
+                .shorten(longUrl)
+                .then(function(result) {
+                    result = result.url;
+                    // Copy to clipboard
+                    copy(result);
+                    console.log(`${chalk.green('success! ' + chalk.white.underline(result) + ' copied to clipboard')}`);
+                })
+                .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
+            return;
 
-        })
-        .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
+        case 'google': // Use self-made goo.gl API client
+            let url = conf.get('providerUrl');
+            let apiKey = conf.get('google_key');
+            let urlWithKey = url + '?key=' + apiKey;
+            api.post(urlWithKey, longUrl)
+                .then(response => {
+                    // Copy to clipboard
+                    copy(response.id);
+                    console.log(`${chalk.green('success! ' + chalk.white.underline(response.id) + ' copied to clipboard')}`);
+                })
+                .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
+            return;
+
+        default:
+            return console.log(' No provider is selected.');
+    }
 
 }
 
 function stats(input) {
-    input += '&projection=FULL'; // stats identifier
-    const urlToExpand = url + '?shortUrl=' + input + '&key=' + apiKey;
 
-    api.get(urlToExpand)
-    .then(response => {
+    switch (defaultProvider) {
+        case 'bitly':
+            return;
 
-      // Display analytics
-      console.log(`${chalk.grey('shortUrl:')} ${response.id}`);
-      console.log(`${chalk.grey('origin:')} ${response.longUrl}`);
-      console.log(`${chalk.grey('created:')} ${fullDate(response.created)}`);
-      console.log(`${chalk.grey('clicks:')}`);
-      console.log(summary(response.analytics));
+        case 'google':
+            let url = conf.get('providerUrl');
+            input += '&projection=FULL'; // stats identifier
+            let apiKey = conf.get('google_key');
+            const urlToExpand = url + '?shortUrl=' + input + '&key=' + apiKey;
 
-    })
-    .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
+            api.get(urlToExpand)
+                .then(response => {
+
+                    // Display analytics
+                    console.log(`${chalk.grey('shortUrl:')} ${response.id}`);
+                    console.log(`${chalk.grey('origin:')} ${response.longUrl}`);
+                    console.log(`${chalk.grey('created:')} ${fullDate(response.created)}`);
+                    console.log(`${chalk.grey('clicks:')}`);
+                    console.log(summary(response.analytics));
+
+                })
+                .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
+            return;
+
+        default:
+            return console.log(' No provider is selected.');
+
+    }
 
 }
 
 
-/* Helper methods */
+/**** Helper methods ****/
 // Get full date
 function fullDate(date) {
     let d = new Date(date);
@@ -138,7 +193,7 @@ function clicksCountries(analytics) {
         });
         return columnify(countries);
     }
-    return chalk.grey('Countries Data NaN');
+    return chalk.grey('COUNTRIES DATA NaN');
 }
 
 
