@@ -1,5 +1,6 @@
 /*
- * get.js gets data for expandUrl, shortenUrl and stats
+ * get.js gets data for expandUrl(), shortenUrl() and stats() using bitly, firebase,
+ * owly, and google API
  *
  */
 
@@ -19,6 +20,7 @@ const defaultProvider = conf.get('defaultProvider');
 
 // Stats summary utility methods
 const googleSummary = require('./lib/stats/google-stats.js').summary;
+const bitlySummary = require('./lib/stats/bitly-stats.js').summary;
 
 
 function expandUrl(input) {
@@ -103,10 +105,15 @@ function stats(input) {
             let token = conf.get('bitly_key');
             const bitly = new BitlyClient(token);
 
-            bitly
-                .countries(input)
+            Promise.all([
+                    bitly.info(input),
+                    bitly.expand(input),
+                    bitly.clicks(input),
+                    bitly.clicksByDay(input),
+                    bitly.countries(input)
+                ])
                 .then(function(result) {
-                    console.log(result);
+                    bitlySummary(result);
                 })
                 .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
             return;
