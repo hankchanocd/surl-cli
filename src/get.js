@@ -9,7 +9,7 @@ const Conf = require('conf');
 const copy = require('clipboardy').writeSync;
 const columnify = require('columnify');
 const ui = require('cliui')();
-const api = require('./api/api.js');
+const api = require('./lib/api.js');
 
 
 // Retrieve data from configurations for accessing the preferred API provider
