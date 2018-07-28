@@ -1,7 +1,7 @@
 {
   "name": "surl-cli",
   "version": "1.0.0",
-  "description": "A cli tool for shortening url",
+  "description": "URL shortener CLI",
   "main": "surl.js",
   "scripts": {
     "test": "mocha --timeout 5000",
@@ -16,10 +16,13 @@
   },
   "keywords": [
     "shortenUrl",
+    "surl",
     "url",
     "cli",
-    "google",
-    "bitly"
+    "bit.ly",
+    "firebase",
+    "ow.ly",
+    "goo.gl"
   ],
   "author": "Hank Chan <hankchanth@icloud.com> (https://github.com/hankchanocd)",
   "license": "MIT",
