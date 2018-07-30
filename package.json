@@ -5,7 +5,8 @@
   "main": "surl.js",
   "scripts": {
     "test": "npm run build; mocha --timeout 6000",
-    "build": "babel ./src -d ./build"
+    "build": "babel ./src -d ./build",
+    "coverage-report": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && codecov -t 8f2ef67c-47f6-42fb-a979-84ffabd99aef"
   },
   "bin": {
     "surl": "./surl.js"
