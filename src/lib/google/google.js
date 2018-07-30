@@ -9,7 +9,7 @@ const { summary, parseSummary } = require('./google-stats.js');
 // Configurations Retrieval
 const Conf = require('conf');
 const conf = new Conf();
-const apiKey = conf.get('google_key');
+const apiKey = conf.get('google_key') || process.env.google_key;
 
 
 // Global variables

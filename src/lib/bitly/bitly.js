@@ -14,7 +14,7 @@ module.exports = function () {
 
     // Formulate a bitly client validate by a secure token
     const { BitlyClient } = require('bitly');
-    const token = conf.get('bitly_key');
+    const token = conf.get('bitly_key') || process.env.bitly_key;
     const bitly = new BitlyClient(token);
 
     // Extend the bitly client object with two summary functions
