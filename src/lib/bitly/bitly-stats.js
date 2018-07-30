@@ -38,13 +38,13 @@ function parseSummary(summary) {
     let clicksByDay = summary[3];
     let clicksByCountry = summary[4];
 
-    let title = info.info[0].title; // 0
-    let shortUrl = clicks.clicks[0].short_url; // 1
-    longUrl = longUrl.expand[0].long_url; // 2
-    let userClicks = clicks.clicks[0].user_clicks; // 3
-    let globalClicks = clicks.clicks[0].global_clicks; // 4
-    clicksByDay = clicksByDay.clicks_by_day[0].clicks; // 5
-    clicksByCountry = clicksByCountry.countries; // 6
+    let title = info.info[0].title;
+    let shortUrl = clicks.clicks[0].short_url; 
+    longUrl = longUrl.expand[0].long_url; 
+    let userClicks = clicks.clicks[0].user_clicks; 
+    let globalClicks = clicks.clicks[0].global_clicks; 
+    clicksByDay = clicksByDay.clicks_by_day[0].clicks; 
+    clicksByCountry = clicksByCountry.countries;
 
 
     return { title, shortUrl, longUrl, userClicks, globalClicks, clicksByDay, clicksByCountry };

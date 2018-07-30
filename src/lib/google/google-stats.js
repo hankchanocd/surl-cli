@@ -27,11 +27,11 @@ function summary(response) {
         return chalk.grey('clicks data NaN');
     } else {
         ui.div({
-            text: response.clicksPeriod,
+            text: clicksPeriodUI(response.analytics),
             width: 35,
             padding: [0, 4, 0, 4]
         }, {
-            text: response.clicksCountries,
+            text: clicksCountriesUI(response.clicksCountries),
             width: 25,
             padding: [0, 4, 0, 4]
         });
@@ -47,13 +47,11 @@ function parseSummary(summary) {
         longUrl: summary.longUrl,
         date: util.fullDate(summary.created),
         analytics: summary.analytics,
-        clicksPeriod: clicksPeriod(summary.analytics),
-        clicksCountries: clicksCountries(summary.analytics)
     }
 }
 
 
-function clicksPeriod(analytics) {
+function clicksPeriodUI(analytics) {
 
     let period = [{
         period: 'allTime',
@@ -81,7 +79,7 @@ function clicksPeriod(analytics) {
 }
 
 
-function clicksCountries(analytics) {
+function clicksCountriesUI(analytics) {
 
     if (analytics.allTime.countries) {
         let countries = analytics.allTime.countries;
