@@ -7,22 +7,15 @@ const inquirer = require('inquirer');
 const Conf = require('conf');
 const conf = new Conf();
 
+
 function inquire() {
     let questions = [{
             type: 'list',
-            name: 'provider',
+            name: 'defaultProvider',
             message: "Change your URL shortener api provider",
-            choices: ['Google', 'Bitly'],
+            choices: ['bitly', 'firebase', 'google'],
             filter: function(val) {
                 return val.toLowerCase();
-            }
-        },
-        {
-            type: 'input',
-            name: 'google_key',
-            message: "Modify your google api key",
-            default: function() {
-                return conf.get('google_key');
             }
         },
         {
@@ -32,32 +25,45 @@ function inquire() {
             default: function() {
                 return conf.get('bitly_key');
             }
+        },
+        {
+            type: 'input',
+            name: 'google_key',
+            message: "Modify your google api key",
+            default: function() {
+                return conf.get('google_key');
+            }
         }
     ];
 
     inquirer.prompt(questions).then(answers => {
-        conf.set('provider', answers.provider);
-        conf.set('google_key', answers.google_key);
+        conf.set('defaultProvider', answers.defaultProvider);
         conf.set('bitly_key', answers.bitly_key);
-        storeShortcutConfiguration();
+        conf.set('google_key', answers.google_key);
+
+        storeDefaultConfiguration();
 
         console.log('saved');
     });
 }
 
-function storeShortcutConfiguration() {
-    if (conf.get('provider') === 'google') {
-        conf.set('providerUrl', 'https://www.googleapis.com/urlshortener/v1/url');
-        conf.set('key', conf.get('google_key'));
-    } else if (conf.get('provider') === 'bitly') {
-        // To be fixed
-        conf.set('providerUrl', 'https://www.googleapis.com/urlshortener/v1/url');
-        conf.set('key', conf.get('bitly_key'));
+// Store the default API provider and its corresponding key/token
+function storeDefaultConfiguration() {
+    switch (conf.get('defaultProvider')) {
+        case 'bitly':
+            conf.set('key', conf.get('bitly_key'));
+            return;
+        case 'google':
+            conf.set('key', conf.get('google_key'));
+            return;
+        default:
+            return;
     }
 }
 
 
 // export modules
 export {
-    inquire
+    inquire,
+    storeDefaultConfiguration
 };
