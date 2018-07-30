@@ -31,6 +31,8 @@ function summary(response) {
 
 }
 
+
+// Parse summary into digestable format for UI as well as testing
 function parseSummary(summary) {
     let info = summary[0];
     let longUrl = summary[1];
@@ -45,7 +47,6 @@ function parseSummary(summary) {
     let globalClicks = clicks.clicks[0].global_clicks; 
     clicksByDay = clicksByDay.clicks_by_day[0].clicks; 
     clicksByCountry = clicksByCountry.countries;
-
 
     return { title, shortUrl, longUrl, userClicks, globalClicks, clicksByDay, clicksByCountry };
 }

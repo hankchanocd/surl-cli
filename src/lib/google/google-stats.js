@@ -24,14 +24,14 @@ function summary(response) {
 
     // Clicks details
     if (!response.analytics) {
-        return chalk.grey('clicks data NaN');
+        console.log(chalk.grey('clicks data NaN'));
     } else {
         ui.div({
             text: clicksPeriodUI(response.analytics),
             width: 35,
             padding: [0, 4, 0, 4]
         }, {
-            text: clicksCountriesUI(response.clicksCountries),
+            text: clicksCountriesUI(response.analytics),
             width: 25,
             padding: [0, 4, 0, 4]
         });
@@ -41,12 +41,13 @@ function summary(response) {
 }
 
 
+// Parse summary into digestable format for UI as well as for testing
 function parseSummary(summary) {
     return {
         shortUrl: summary.id,
         longUrl: summary.longUrl,
         date: util.fullDate(summary.created),
-        analytics: summary.analytics,
+        analytics: summary.analytics
     }
 }
 
