@@ -7,7 +7,6 @@
 const inquirer = require('inquirer');
 const Conf = require('conf');
 const conf = new Conf();
-const storeDefaultConfiguration = require('./config.js').storeDefaultConfiguration;
 
 
 function inquire() {
@@ -37,7 +36,7 @@ function inquire() {
         },
         {
             type: 'list',
-            name: 'provider',
+            name: 'defaultProvider',
             message: "Finally, choose your default URL shortener api provider\n" +
                 "You can change the default later with `surl config`",
             choices: ['bitly', 'firebase', 'google'],
@@ -52,8 +51,6 @@ function inquire() {
         conf.set('google_key', answers.google_key);
         conf.set('firebase_key', answers.firebase_key);
         conf.set('defaultProvider', answers.defaultProvider);
-
-        storeDefaultConfiguration();
 
         console.log('saved');
     });

@@ -53,28 +53,8 @@ config.inquire = function inquire() {
         conf.set('firebase_key', answers.firebase_key);
         conf.set('google_key', answers.google_key);
 
-        config.storeDefaultConfiguration();
-
         console.log('saved');
     });
-};
-
-
-// Store the default API provider and its corresponding key/token
-config.storeDefaultConfiguration = function storeDefaultConfiguration() {
-    switch (conf.get('defaultProvider')) {
-        case 'bitly':
-            conf.set('key', conf.get('bitly_key'));
-            return;
-        case 'firebase':
-            conf.set('key', conf.get('firebase_key'));
-            return;
-        case 'google':
-            conf.set('key', conf.get('google_key'));
-            return;
-        default:
-            return;
-    }
 };
 
 
