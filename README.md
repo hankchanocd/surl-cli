@@ -8,7 +8,7 @@ npm install surl-cli -g
 
 ## Usage
 ### Init
-Before you start using ```surl```, initialize ```surl```'s configuration on selecting API provider. You must save at least one API key/token to ```surl``` from one of the three API providers below. While you can choose to store API keys/tokens from all three service providers, ```surl``` only allows you to use service from a single default provider at a time.
+Before you start using ```surl```, initialize configuration using ```surl init``` to select a default API provider. You must save at least one API key/token to ```surl``` from one of the three API providers below. While you can choose to store every API keys/tokens from all three service providers below, ```surl``` only allows you to use service from a single default provider at a time.
 - Follow the [guide](./bitly.md) to go to <b>Bitly</b>'s API page to receive your API key/token.
 - Follow the [guide](./firebase.md) to go to <b>Firebase (FDB)</b>'s API page to receive your API key/token.
 - To comply with [Google's policy](https://developers.googleblog.com/2018/03/transitioning-google-url-shortener.html) on sunsetting <b>goo.gl</b> service on <b>May 2019</b>, we recommend users not to use URL shortening service from goo.gl. However, existing users of goo.gl can still receive their API keys/tokens at [console](https://console.developers.google.com/apis/credentials?project=constant-jigsaw-188105&folder&organizationId) until May 2019, while no new users are allowed to register with the service.
