@@ -8,7 +8,10 @@ const Conf = require('conf');
 const conf = new Conf();
 
 
-function inquire() {
+// Holder object
+const config = {};
+
+config.inquire = function inquire() {
     let questions = [{
             type: 'list',
             name: 'defaultProvider',
@@ -28,6 +31,14 @@ function inquire() {
         },
         {
             type: 'input',
+            name: 'firebase_key',
+            message: "Your firebase api key (or enter to skip)",
+            default: function() {
+                return conf.get('firebase_key');
+            }
+        },
+        {
+            type: 'input',
             name: 'google_key',
             message: "Modify your google api key",
             default: function() {
@@ -39,19 +50,23 @@ function inquire() {
     inquirer.prompt(questions).then(answers => {
         conf.set('defaultProvider', answers.defaultProvider);
         conf.set('bitly_key', answers.bitly_key);
+        conf.set('firebase_key', answers.firebase_key);
         conf.set('google_key', answers.google_key);
 
-        storeDefaultConfiguration();
+        config.storeDefaultConfiguration();
 
         console.log('saved');
     });
-}
+};
 
 // Store the default API provider and its corresponding key/token
-function storeDefaultConfiguration() {
+config.storeDefaultConfiguration = function storeDefaultConfiguration() {
     switch (conf.get('defaultProvider')) {
         case 'bitly':
             conf.set('key', conf.get('bitly_key'));
+            return;
+        case 'firebase':
+            conf.set('key', conf.get('firebase_key'));
             return;
         case 'google':
             conf.set('key', conf.get('google_key'));
@@ -59,11 +74,8 @@ function storeDefaultConfiguration() {
         default:
             return;
     }
-}
+};
 
 
 // export modules
-export {
-    inquire,
-    storeDefaultConfiguration
-};
+module.exports = config;
