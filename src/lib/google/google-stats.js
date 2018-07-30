@@ -44,10 +44,10 @@ function summary(response) {
 // Parse summary into digestable format for UI as well as for testing
 function parseSummary(summary) {
     return {
-        shortUrl: summary.id,
-        longUrl: summary.longUrl,
-        date: util.fullDate(summary.created),
-        analytics: summary.analytics
+        shortUrl: summary.id || chalk.gray('NaN'),
+        longUrl: summary.longUrl || chalk.gray('NaN'),
+        date: util.fullDate(summary.created) || chalk.gray('NaN'),
+        analytics: summary.hasOwnProperty('analytics') ? summary.analytics : false
     }
 }
 
