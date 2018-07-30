@@ -1,5 +1,6 @@
 /*
- * api.js deals with RESTful api operations
+ * api.js is self-made RESTful api operation, designed for those URL shortening services
+ * that don't have a proper custom API client implementation, unlike BitlyClient
  *
  */
 
@@ -33,7 +34,7 @@ api.post = async function(urlWithKey, urlToShorten) {
         method: 'POST',
         body: JSON.stringify({
             longUrl: urlToShorten
-        }), // payload is body for options in fetch()
+        }),
         headers: {
             'Content-type': 'application/json'
         }

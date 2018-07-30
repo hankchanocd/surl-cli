@@ -1,6 +1,6 @@
 /*
  * get.js gets data for expandUrl(), shortenUrl() and stats() using bitly, firebase,
- * and google API
+ * and goo.gl API
  *
  */
 
@@ -23,7 +23,7 @@ const chalk = require('chalk');
 function expandUrl(input) {
 
     switch (util.identifyAPIProvider(input)) {
-        case 'bitly': // Use bitly API client
+        case 'bitly':
             
             bitly
                 .expand(input)
@@ -36,7 +36,7 @@ function expandUrl(input) {
                 .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
             return;
 
-        case 'google': // Use self-made goo.gl API client
+        case 'google':
             
             let url = googl.expandUrl(input);
             api.get(url)
@@ -57,7 +57,7 @@ function expandUrl(input) {
 function shortenUrl(longUrl) {
 
     switch (defaultProvider) {
-        case 'bitly': // Use bitly API client
+        case 'bitly':
 
             bitly
                 .shorten(longUrl)
@@ -70,13 +70,13 @@ function shortenUrl(longUrl) {
                 .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
             return;
 
-        case 'google': // Use self-made goo.gl API client
+        case 'google':
             
             let urlWithKey = googl.shortenUrl();
             api.post(urlWithKey, longUrl)
                 .then(response => {
-                    // Copy to clipboard
                     let shortUrl = response.id;
+                    // Copy to clipboard
                     copy(shortUrl);
                     console.log(`${chalk.green('success! ' + chalk.white.underline(shortUrl) + ' copied to clipboard')}`);
                 })
@@ -102,6 +102,7 @@ function stats(input) {
                     bitly.countries(input)
                 ])
                 .then(function(result) {
+                    // Display summary data
                     bitly.summary(result);
                 })
                 .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
@@ -112,7 +113,7 @@ function stats(input) {
             let url = googl.statsUrl(input);
             api.get(url)
                 .then(response => {
-                    // Display analytics
+                    // Display summary data
                     googl.summary(response);
                 })
                 .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));

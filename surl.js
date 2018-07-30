@@ -2,9 +2,13 @@
 
 'use strict';
 
-/**
- * Dependencies
+/*
+ * This program is a lightweight cli tool for shortening url using various api providers, 
+ * including but not limited to Bitly, Firebase, and Goo.gl
+ *
  */
+
+// Dependencies
 const program = require('commander');
 const chalk = require('chalk');
 
@@ -13,8 +17,6 @@ const { expandUrl, shortenUrl, stats } = require('./build/get');
 const config = require('./build/config');
 const init = require('./build/init');
 
-// This program is a lightweight cli tool for shortening url using various api providers, 
-// including but not limited to Bitly, Firebase, and Goo.gl
 
 program
     .version('1.0.0', '-v, --version')

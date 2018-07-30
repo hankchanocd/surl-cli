@@ -59,6 +59,7 @@ config.inquire = function inquire() {
     });
 };
 
+
 // Store the default API provider and its corresponding key/token
 config.storeDefaultConfiguration = function storeDefaultConfiguration() {
     switch (conf.get('defaultProvider')) {

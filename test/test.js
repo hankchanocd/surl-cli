@@ -3,17 +3,23 @@
 /*
  * Test
  * ps. --harmony indicates to Node to run using ES8
- * ps. The command to run the test with Mocha is modified to allow 5000 ms at max response time
+ * ps. The command to run the test with Mocha is modified to allow maximum of 5000 ms response time
+ *
  */
+
 /* jshint ignore:start */
 
 
 // Dependencies
-const expect = require('expect.js');
+const expect = require('expect.js'); // expect.js provides syntatical sugar on testing
 const chalk = require('chalk');
 const api = require('../build/lib/api.js');
 const googl = require('../build/lib/google/google.js');
 const bitly = require('../build/lib/bitly/bitly.js')();
+
+
+// Indiate to users the Mocha is modified to allow 5000 ms response time
+console.log(chalk.gray('Warning: Mocha command is modified to allow maximum of 5000 ms response time for API testing'));
 
 
 // Test REST API get methods
@@ -80,6 +86,7 @@ describe('surl [longUrl] (shorten url)', () => {
 // Test the data integrity of usage statistics
 describe('surl --stats [shortUrl] (usage statistics)', () => {
 
+    // Testing bitly
     it('Testing the response integrity from Bitly', async() => {
 
         let input = 'http://bit.ly/2uVScFX';
@@ -112,6 +119,7 @@ describe('surl --stats [shortUrl] (usage statistics)', () => {
     });
 
 
+    // Testing goo.gl
     it('Testing the response integrity from goo.gl', async() => {
 
         let url = googl.statsUrl('https://goo.gl/zZYDD8');
@@ -128,10 +136,11 @@ describe('surl --stats [shortUrl] (usage statistics)', () => {
         expect(result.longUrl).to.equal("http://tanepiper.github.io/node-bitly/classes/_bitly_.bitlyclient.html");
         expect(result.date).to.be.equal('2018 7 28');
         expect(result.analytics).to.be.a('object');
-        expect(result.analytics).to.be.ok(); // testing truthiness / Not Null
-        expect(result.analytics).to.not.be.empty(); // testing truthiness / Not Null
+        expect(result.analytics).to.be.ok(); // testing truthiness/Not Null
+        expect(result.analytics).to.not.be.empty(); // testing emptiness
         expect(result.analytics).to.have.keys(['allTime', 'month', 'week', 'day', 'twoHours']);
     });
+
 });
 
 /* jshint ignore:end */

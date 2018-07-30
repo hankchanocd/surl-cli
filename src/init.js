@@ -1,6 +1,9 @@
 /*
- * modules
+ * Initiate configuration, usually the first step when users start to use `surl`
+ *
  */
+
+// Dependencies
 const inquirer = require('inquirer');
 const Conf = require('conf');
 const conf = new Conf();
