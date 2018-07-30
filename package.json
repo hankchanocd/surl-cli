@@ -31,7 +31,6 @@
   },
   "homepage": "https://github.com/hankchanocd/surl-cli#readme",
   "dependencies": {
-    "babel-cli": "^6.26.0",
     "bitly": "^6.0.8",
     "chalk": "^2.4.1",
     "clipboardy": "^1.2.3",
@@ -43,6 +42,7 @@
     "node-fetch": "^2.2.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "expect.js": "^0.3.1",
     "mocha": "^5.2.0"
