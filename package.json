@@ -1,6 +1,6 @@
 {
   "name": "surl-cli",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "URL shortener CLI",
   "main": "surl.js",
   "scripts": {
