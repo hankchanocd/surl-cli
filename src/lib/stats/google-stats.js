@@ -15,28 +15,43 @@ const ui = require('cliui')();
 // Clicks summary
 function summary(response) {
 
-    console.log(`${chalk.grey('shortUrl:')} ${response.id}`);
+    response = parseSummary(response);
+
+    console.log(`${chalk.grey('shortUrl:')} ${response.shortUrl}`);
     console.log(`${chalk.grey('origin:')} ${response.longUrl}`);
-    console.log(`${chalk.grey('created:')} ${util.fullDate(response.created)}`);
+    console.log(`${chalk.grey('created:')} ${response.date}`);
     console.log(`${chalk.grey('clicks:')}`);
 
-    let analytics = response.analytics;
-    if (!analytics) {
+    // Clicks details
+    if (!response.analytics) {
         return chalk.grey('clicks data NaN');
+    } else {
+        ui.div({
+            text: response.clicksPeriod,
+            width: 35,
+            padding: [0, 4, 0, 4]
+        }, {
+            text: response.clicksCountries,
+            width: 25,
+            padding: [0, 4, 0, 4]
+        });
+
+        console.log(ui.toString());
     }
-
-    ui.div({
-        text: clicksPeriod(analytics),
-        width: 35,
-        padding: [0, 4, 0, 4]
-    }, {
-        text: clicksCountries(analytics),
-        width: 25,
-        padding: [0, 4, 0, 4]
-    });
-
-    console.log(ui.toString());
 }
+
+
+function parseSummary(summary) {
+    return {
+        shortUrl: summary.id,
+        longUrl: summary.longUrl,
+        date: util.fullDate(summary.created),
+        analytics: summary.analytics,
+        clicksPeriod: clicksPeriod(summary.analytics),
+        clicksCountries: clicksCountries(summary.analytics)
+    }
+}
+
 
 function clicksPeriod(analytics) {
 
@@ -65,6 +80,7 @@ function clicksPeriod(analytics) {
     return columnify(period);
 }
 
+
 function clicksCountries(analytics) {
 
     if (analytics.allTime.countries) {
@@ -83,5 +99,6 @@ function clicksCountries(analytics) {
 
 // Export
 export {
-    summary
+    summary,
+    parseSummary
 };

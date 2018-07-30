@@ -9,32 +9,50 @@ const chalk = require('chalk');
 
 // summary
 function summary(response) {
-    let info = response[0];
-    let longUrl = response[1];
-    let clicks = response[2];
-    let clicksByDay = response[3];
-    let clicksByCountry = response[4];
 
-    console.log(`${chalk.grey('title:')} ${info.info[0].title}`);
-    console.log(`${chalk.grey('short url:')} ${clicks.clicks[0].short_url}`);
-    console.log(`${chalk.grey('long url:')} ${longUrl.expand[0].long_url}`);
-    console.log(`${chalk.grey('user clicks:')} ${clicks.clicks[0].user_clicks}`);
-    console.log(`${chalk.grey('global clicks:')} ${clicks.clicks[0].global_clicks}`);
+    // Parse the incoming summary to digestable info array
+    response = parseSummary(response);
+
+    console.log(`${chalk.grey('title:')} ${response.title}`);
+    console.log(`${chalk.grey('short url:')} ${response.shortUrl}`);
+    console.log(`${chalk.grey('long url:')} ${response.longUrl}`);
+    console.log(`${chalk.grey('user clicks:')} ${response.userClicks}`);
+    console.log(`${chalk.grey('global clicks:')} ${response.globalClicks}`);
     console.log(`${chalk.grey('days ago:')}`);
     let counter = 0;
-    clicksByDay.clicks_by_day[0].clicks.forEach(obj => {
+    response.clicksByDay.forEach(obj => {
         console.log(`  ${counter} days ago: ${obj.clicks} clicks`);
         counter++;
     });
     console.log(`${chalk.grey('countries:')}`);
-    clicksByCountry.countries.forEach(obj => {
+    response.clicksByCountry.forEach(obj => {
         console.log(`  ${obj.country}: ${obj.clicks}`);
     });
 
 }
 
+function parseSummary(summary) {
+    let info = summary[0];
+    let longUrl = summary[1];
+    let clicks = summary[2];
+    let clicksByDay = summary[3];
+    let clicksByCountry = summary[4];
+
+    let title = info.info[0].title; // 0
+    let shortUrl = clicks.clicks[0].short_url; // 1
+    longUrl = longUrl.expand[0].long_url; // 2
+    let userClicks = clicks.clicks[0].user_clicks; // 3
+    let globalClicks = clicks.clicks[0].global_clicks; // 4
+    clicksByDay = clicksByDay.clicks_by_day[0].clicks; // 5
+    clicksByCountry = clicksByCountry.countries; // 6
+
+
+    return { title, shortUrl, longUrl, userClicks, globalClicks, clicksByDay, clicksByCountry };
+}
+
 
 // Export 
 export {
-    summary
+    summary,
+    parseSummary
 };
