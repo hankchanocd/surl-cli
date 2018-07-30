@@ -3,7 +3,7 @@
 /*
  * Test
  * ps. --harmony indicates to Node to run using ES8
- * ps. The command to run the test with Mocha is modified to allow maximum of 5000 ms response time
+ * ps. The command to run the test with Mocha is modified to allow maximum of 6000 ms response time
  *
  */
 
@@ -21,8 +21,11 @@ const unitTest = require('./unit-test.js');
 
 
 function test() {
-    // Indicate to users that Mocha is modified to allow 5000 ms response time
-    console.log(chalk.gray('Warning: Mocha command is modified to allow maximum of 5000 ms response time for API testing\n'));
+
+    console.log('\n> Running Tests...');
+
+    // Indicate to users that Mocha is modified to allow 6000 ms response time
+    console.log(chalk.gray('Warning: Mocha command is modified to allow maximum of 6000 ms response time for API testing\n'));
 
 
     // API tests
