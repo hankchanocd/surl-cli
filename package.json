@@ -21,7 +21,6 @@
     "cli",
     "bit.ly",
     "firebase",
-    "ow.ly",
     "goo.gl"
   ],
   "author": "Hank Chan <hankchanth@icloud.com> (https://github.com/hankchanocd)",
@@ -31,6 +30,7 @@
   },
   "homepage": "https://github.com/hankchanocd/surl-cli#readme",
   "dependencies": {
+    "babel-cli": "^6.26.0",
     "bitly": "^6.0.8",
     "chalk": "^2.4.1",
     "clipboardy": "^1.2.3",
@@ -38,7 +38,6 @@
     "columnify": "^1.5.4",
     "commander": "^2.16.0",
     "conf": "^1.4.0",
-    "configstore": "^3.1.2",
     "inquirer": "^5.2.0",
     "node-fetch": "^2.2.0"
   },
