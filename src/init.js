@@ -4,16 +4,16 @@
 const inquirer = require('inquirer');
 const Conf = require('conf');
 const conf = new Conf();
+const { storeDefaultConfiguration } = require('config.js');
 
 
 function inquire() {
     let questions = [{
-            type: 'list',
-            name: 'provider',
-            message: "Your URL shortener api provider",
-            choices: ['Google', 'Bitly'],
-            filter: function(val) {
-                return val.toLowerCase();
+            type: 'input',
+            name: 'bitly_key',
+            message: "Your bitly api key (or enter to skip)",
+            default: function() {
+                return conf.get('bitly_key');
             }
         },
         {
@@ -25,38 +25,30 @@ function inquire() {
             }
         },
         {
-            type: 'input',
-            name: 'bitly_key',
-            message: "Your bitly api key (or enter to skip)",
-            default: function() {
-                return conf.get('bitly_key');
+            type: 'list',
+            name: 'provider',
+            message: "Finally, choose your default URL shortener api provider\n" +
+                "You can change the default later with `surl config`",
+            choices: ['bitly', 'firebase', 'owly', 'google'],
+            filter: function(val) {
+                return val.toLowerCase();
             }
         }
     ];
 
     inquirer.prompt(questions).then(answers => {
-        conf.set('provider', answers.provider);
-        conf.set('google_key', answers.google_key);
         conf.set('bitly_key', answers.bitly_key);
-        storeShortcutConfiguration();
+        conf.set('google_key', answers.google_key);
+        conf.set('defaultProvider', answers.defaultProvider);
+
+        storeDefaultConfiguration();
 
         console.log('saved');
     });
 }
 
-function storeShortcutConfiguration() {
-    if (conf.get('provider') === 'google') {
-        conf.set('providerUrl', 'https://www.googleapis.com/urlshortener/v1/url');
-        conf.set('key', conf.get('google_key'));
-    } else if (conf.get('provider') === 'bitly') {
-        // To be fixed
-        conf.set('providerUrl', 'https://www.googleapis.com/urlshortener/v1/url');
-        conf.set('key', conf.get('bitly_key'));
-    }
-}
-
 
 // Export module
-module.exports = {
+export {
     inquire
 };
