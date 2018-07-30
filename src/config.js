@@ -4,6 +4,7 @@
 
 // Dependencies
 const inquirer = require('inquirer');
+const chalk = require('chalk');
 const Conf = require('conf');
 const conf = new Conf();
 
@@ -12,6 +13,13 @@ const conf = new Conf();
 const config = {};
 
 config.inquire = function inquire() {
+
+    // Config script should be allowed to run only after the init script is called
+    if (!config.isInitCalledYet(conf)) {
+        console.log(chalk.gray(`${chalk.white('`surl config`')} can only be used after ${chalk.white('`surl init`')} is called`));
+        return; // Exiting if init script has not been called yet
+    }
+
     let questions = [{
             type: 'list',
             name: 'defaultProvider',
@@ -56,6 +64,17 @@ config.inquire = function inquire() {
         console.log('saved');
     });
 };
+
+
+// Check to see if init script is being called the first time
+config.isInitCalledYet = function isInitCalledYet (conf) {
+
+    if (conf.get('init_run_time_counter')) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 
 // export modules

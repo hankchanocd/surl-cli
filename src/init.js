@@ -5,11 +5,25 @@
 
 // Dependencies
 const inquirer = require('inquirer');
+const chalk = require('chalk');
 const Conf = require('conf');
 const conf = new Conf();
+const isInitCalledYet = require('./config.js').isInitCalledYet;
 
 
 function inquire() {
+
+    // init script should be allowed to run only at users' first encounter with `surl`
+    if (isInitCalledYet(conf)) {
+        console.log(chalk.gray(`${chalk.white('`surl init`')} should be called only the first time using surl.\n` +
+            ` Please use ${chalk.white('`surl config`')} to configure your settings.`));
+        return; // Exiting if init script has been called
+    } else {
+        console.log('Initiating configuration...');
+        conf.set('init_run_time_counter', 1); // And keep executing the rest of the script
+    }
+
+
     let questions = [{
             type: 'input',
             name: 'bitly_key',
