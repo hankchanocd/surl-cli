@@ -1,35 +1,30 @@
 /*
  * get.js gets data for expandUrl(), shortenUrl() and stats() using bitly, firebase,
- * owly, and google API
+ * and google API
  *
  */
 
 // Dependencies
-const { BitlyClient } = require('bitly');
 const copy = require('clipboardy').writeSync;
 const api = require('./lib/api.js');
+const bitly = require('./lib/bitly/bitly.js')();
+const googl = require('./lib/google/google.js');
 const util = require('./lib/util.js');
-
-// UI
-const chalk = require('chalk');
 
 // Configurations Retrieval
 const Conf = require('conf');
 const conf = new Conf();
 const defaultProvider = conf.get('defaultProvider');
 
-// Stats summary utility methods
-const googleSummary = require('./lib/stats/google-stats.js').summary;
-const bitlySummary = require('./lib/stats/bitly-stats.js').summary;
+// UI
+const chalk = require('chalk');
 
 
 function expandUrl(input) {
 
     switch (util.identifyAPIProvider(input)) {
         case 'bitly': // Use bitly API client
-            let token = conf.get('bitly_key');
-            const bitly = new BitlyClient(token);
-
+            
             bitly
                 .expand(input)
                 .then(function(result) {
@@ -42,11 +37,9 @@ function expandUrl(input) {
             return;
 
         case 'google': // Use self-made goo.gl API client
-            let url = conf.get('providerUrl');
-            let apiKey = conf.get('google_key');
-            let urlToExpand = url + '?shortUrl=' + input + '&key=' + apiKey;
-
-            api.get(urlToExpand)
+            
+            let url = googl.expandUrl(input);
+            api.get(url)
                 .then(response => {
                     // Copy to clipboard
                     copy(response.longUrl);
@@ -65,8 +58,6 @@ function shortenUrl(longUrl) {
 
     switch (defaultProvider) {
         case 'bitly': // Use bitly API client
-            let token = conf.get('bitly_key');
-            const bitly = new BitlyClient(token);
 
             bitly
                 .shorten(longUrl)
@@ -80,14 +71,14 @@ function shortenUrl(longUrl) {
             return;
 
         case 'google': // Use self-made goo.gl API client
-            let url = conf.get('providerUrl');
-            let apiKey = conf.get('google_key');
-            let urlWithKey = url + '?key=' + apiKey;
+            
+            let urlWithKey = googl.shortenUrl();
             api.post(urlWithKey, longUrl)
                 .then(response => {
                     // Copy to clipboard
-                    copy(response.id);
-                    console.log(`${chalk.green('success! ' + chalk.white.underline(response.id) + ' copied to clipboard')}`);
+                    let shortUrl = response.id;
+                    copy(shortUrl);
+                    console.log(`${chalk.green('success! ' + chalk.white.underline(shortUrl) + ' copied to clipboard')}`);
                 })
                 .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
             return;
@@ -102,8 +93,6 @@ function stats(input) {
 
     switch (util.identifyAPIProvider(input)) {
         case 'bitly': // Use bitly API client
-            let token = conf.get('bitly_key');
-            const bitly = new BitlyClient(token);
 
             Promise.all([
                     bitly.info(input),
@@ -113,21 +102,18 @@ function stats(input) {
                     bitly.countries(input)
                 ])
                 .then(function(result) {
-                    bitlySummary(result);
+                    bitly.summary(result);
                 })
                 .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
             return;
 
         case 'google': // Use self-made goo.gl API client
-            let url = conf.get('providerUrl');
-            input += '&projection=FULL'; // stats identifier
-            let apiKey = conf.get('google_key');
-            const urlToAnalyze = url + '?shortUrl=' + input + '&key=' + apiKey;
-
-            api.get(urlToAnalyze)
+            
+            let url = googl.statsUrl(input);
+            api.get(url)
                 .then(response => {
                     // Display analytics
-                    googleSummary(response);
+                    googl.summary(response);
                 })
                 .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
             return;
