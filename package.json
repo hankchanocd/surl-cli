@@ -8,7 +8,7 @@
     "prebuild": "rimraf ./build",
     "build": "babel ./src -d ./build",
     "coverage-check": "istanbul cover -x *.test.js _mocha -- -R spec test/test.js",
-    "coverage-report": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && codecov"
+    "coverage-report": "./coverage-report.sh"
   },
   "bin": {
     "surl": "./build/surl.js"

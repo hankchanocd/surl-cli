@@ -3,3 +3,4 @@ build
 tags
 coverage
 *.log
+.codecov.yml
