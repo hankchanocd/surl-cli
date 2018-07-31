@@ -27,6 +27,10 @@
     "firebase",
     "goo.gl"
   ],
+  "files": [
+    "build",
+    "README.md"
+  ],
   "author": "Hank Chan <hankchanth@icloud.com> (https://github.com/hankchanocd)",
   "license": "MIT",
   "bugs": {
