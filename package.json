@@ -1,22 +1,25 @@
 {
   "name": "surl-cli",
-  "version": "1.1.1",
+  "version": "0.0.0-development",
   "description": "URL shortener CLI",
   "main": "surl.js",
   "scripts": {
+    "commit": "git-cz",
     "test": "npm run build; mocha --timeout 6000",
     "watch": "npm run build; mocha --watch --timeout 6000",
     "prebuild": "rimraf ./build",
     "build": "babel ./src -d ./build",
     "coverage-check": "istanbul cover -x *.test.js _mocha -- -R spec test/test.js",
-    "coverage-report": "./coverage-report.sh"
+    "coverage-report": "./coverage-report.sh",
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "bin": {
     "surl": "./build/surl.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hankchanocd/surl-cli.git"
+    "url": "https://github.com/hankchanocd/surl-cli.git"
   },
   "keywords": [
     "shortenUrl",
@@ -53,15 +56,22 @@
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-preset-env": "^1.7.0",
     "codecov": "^3.0.4",
+    "commitizen": "^2.10.1",
+    "cz-conventional-changelog": "^2.1.0",
     "expect.js": "^0.3.1",
     "ghooks": "^2.0.4",
     "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "semantic-release": "^15.9.2",
+    "travis-deploy-once": "^5.0.1"
   },
   "config": {
     "ghooks": {
       "pre-commit": "npm test"
     }
+  },
+  "czConfig": {
+    "path": "node_modules/cz-conventional-changelog"
   }
 }
