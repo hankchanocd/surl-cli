@@ -48,7 +48,7 @@ function parseSummary(summary) {
         longUrl: summary.longUrl || chalk.gray('NaN'),
         date: util.fullDate(summary.created) || chalk.gray('NaN'),
         analytics: summary.hasOwnProperty('analytics') ? summary.analytics : false
-    }
+    };
 }
 
 
