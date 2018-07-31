@@ -70,7 +70,8 @@
   },
   "config": {
     "ghooks": {
-      "pre-commit": "npm run test:no-api"
+      "pre-commit": "npm run test:no-api",
+      "pre-push": "npm run test"
     }
   },
   "czConfig": {
