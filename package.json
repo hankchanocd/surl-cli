@@ -6,7 +6,9 @@
   "scripts": {
     "test": "npm run build; mocha --timeout 6000",
     "prebuild": "rimraf ./build",
-    "build": "babel ./src -d ./build"
+    "build": "babel ./src -d ./build",
+    "coverage-check": "istanbul cover -x *.test.js _mocha -- -R spec test/test.js",
+    "coverage-report": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && codecov"
   },
   "bin": {
     "surl": "./surl.js"
