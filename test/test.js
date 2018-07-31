@@ -24,12 +24,20 @@ function test() {
     console.log(chalk.gray('Warning: Mocha command is modified to allow maximum of 6000 ms response time for API testing\n'));
 
 
-    // API tests
-    apiTest();
+    // Determine the running mode
+    const currentEnv = typeof(process.env.NODE_ENV) == 'string' ? process.env.NODE_ENV.toLowerCase() : '';
 
+    if (currentEnv === 'no-api') {
 
-    // Unit tests
-    unitTest();
+        unitTest();
+
+    } else {
+
+        apiTest();
+
+        unitTest();
+    }
+
 };
 
 

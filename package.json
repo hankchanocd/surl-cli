@@ -6,6 +6,7 @@
   "scripts": {
     "commit": "git-cz",
     "test": "npm run build; mocha --timeout 6000",
+    "test:no-api": "npm run build; NODE_ENV=no-api mocha",
     "watch": "npm test -- -w",
     "prebuild": "rimraf ./build",
     "build": "babel ./src -d ./build",
@@ -69,7 +70,7 @@
   },
   "config": {
     "ghooks": {
-      "pre-commit": "npm test"
+      "pre-commit": "npm run test:no-api"
     }
   },
   "czConfig": {
