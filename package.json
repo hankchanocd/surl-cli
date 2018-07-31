@@ -1,12 +1,12 @@
 {
   "name": "surl-cli",
-  "version": "0.0.0-development",
+  "version": "0.0.0-semantically-released",
   "description": "URL shortener CLI",
-  "main": "surl.js",
+  "main": "src/surl.js",
   "scripts": {
     "commit": "git-cz",
     "test": "npm run build; mocha --timeout 6000",
-    "watch": "npm run build; mocha --watch --timeout 6000",
+    "watch": "npm test -- -w",
     "prebuild": "rimraf ./build",
     "build": "babel ./src -d ./build",
     "coverage-check": "istanbul cover -x *.test.js _mocha -- -R spec test/test.js",
