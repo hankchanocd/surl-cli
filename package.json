@@ -10,6 +10,7 @@
     "prebuild": "rimraf ./build",
     "build": "babel ./src -d ./build",
     "coverage-check": "istanbul cover -x *.test.js _mocha -- -R spec test/test.js",
+    "coverage-show": "npm run coverage-check; open coverage/lcov-report/index.html",
     "coverage-report": "./coverage-report.sh",
     "semantic-release": "semantic-release",
     "travis-deploy-once": "travis-deploy-once"
