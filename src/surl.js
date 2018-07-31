@@ -13,9 +13,9 @@ const program = require('commander');
 const chalk = require('chalk');
 
 // Action
-const { expandUrl, shortenUrl, stats } = require('./build/get');
-const config = require('./build/config');
-const init = require('./build/init');
+const { expandUrl, shortenUrl, stats } = require('./get');
+const config = require('./config');
+const init = require('./init');
 
 
 program

@@ -11,7 +11,7 @@
     "coverage-report": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && codecov"
   },
   "bin": {
-    "surl": "./surl.js"
+    "surl": "./build/surl.js"
   },
   "repository": {
     "type": "git",
