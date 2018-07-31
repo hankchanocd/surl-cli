@@ -11,11 +11,7 @@
 
 
 // Dependencies
-const expect = require('expect.js'); // expect.js provides syntatical sugar on testing
 const chalk = require('chalk');
-const api = require('../build/lib/api.js');
-const googl = require('../build/lib/google/google.js');
-const bitly = require('../build/lib/bitly/bitly.js')();
 const apiTest = require('./api-test.js');
 const unitTest = require('./unit-test.js');
 
