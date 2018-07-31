@@ -13,7 +13,7 @@ const program = require('commander');
 const chalk = require('chalk');
 
 // Action
-const { expandUrl, shortenUrl, stats } = require('./get');
+const { expandUrl, shortenUrl, stats, rawStats } = require('./get');
 const config = require('./config');
 const init = require('./init');
 
@@ -25,6 +25,7 @@ program
         ` ${chalk.bold('Firebase API')}, and ${chalk.bold('goo.gl API')}`)
     .option('-r, --reverse', 'expand the shortened url')
     .option('-s, --stats', "display a shortUrl's analytics")
+    .option('--rawstats', "display a shortUrl's analytics in raw data")
     .on('--help', function() {
         console.log();
         console.log('  Please initiate configuration for default API provider and API keys/tokens before start using surl');
@@ -57,6 +58,9 @@ program
 
         } else if (options.stats) {
             stats(url);
+
+        } else if (options.rawstats) {
+            rawStats(url);
 
         } else if (process.argv[2] === 'init') {
             init.inquire();

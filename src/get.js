@@ -9,7 +9,8 @@ const copy = require('clipboardy').writeSync;
 const api = require('./lib/request.js');
 const bitly = require('./lib/bitly/bitly.js')();
 const googl = require('./lib/google/google.js');
-const util = require('./lib/util.js');
+const _util = require('./lib/util.js');
+const util = require('util'); // Node's util library
 
 // Configurations Retrieval
 const Conf = require('conf');
@@ -22,7 +23,7 @@ const chalk = require('chalk');
 
 function expandUrl(input) {
 
-    switch (util.identifyAPIProvider(input)) {
+    switch (_util.identifyAPIProvider(input)) {
         case 'bitly':
             
             bitly
@@ -91,7 +92,7 @@ function shortenUrl(longUrl) {
 
 function stats(input) {
 
-    switch (util.identifyAPIProvider(input)) {
+    switch (_util.identifyAPIProvider(input)) {
         case 'bitly': // Use bitly API client
 
             Promise.all([
@@ -126,11 +127,51 @@ function stats(input) {
 
 }
 
+function rawStats(input) {
+
+    switch (_util.identifyAPIProvider(input)) {
+        case 'bitly': // Use bitly API client
+
+            Promise.all([
+                    bitly.info(input),
+                    bitly.expand(input),
+                    bitly.clicks(input),
+                    bitly.clicksByDay(input),
+                    bitly.countries(input)
+                ])
+                .then(function(result) {
+                    // Display summary data
+                    let rawData = bitly.parseSummary(result);
+                    console.log(util.inspect(rawData, true, null));
+                })
+                .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
+            return;
+
+        case 'google': // Use self-made goo.gl API client
+            
+            let url = googl.statsUrl(input);
+            api.get(url)
+                .then(response => {
+                    // Display raw data
+                    let rawData = googl.parseSummary(response);
+                    console.log(util.inspect(rawData, true, null));
+                })
+                .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
+            return;
+
+        default:
+            return console.log(' Unable to detect provider from the link.');
+
+    }
+
+}
+
 
 
 // Export module
 export {
     expandUrl,
     shortenUrl,
-    stats
+    stats,
+    rawStats
 };
