@@ -5,9 +5,8 @@
   "main": "surl.js",
   "scripts": {
     "test": "npm run build; mocha --timeout 6000",
-    "build": "babel ./src -d ./build",
-    "istanbul": "istanbul cover -x *.test.js _mocha -- -R spec test/test.js",
-    "coverage-report": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && codecov -t 8f2ef67c-47f6-42fb-a979-84ffabd99aef"
+    "prebuild": "rimraf ./build",
+    "build": "babel ./src -d ./build"
   },
   "bin": {
     "surl": "./surl.js"
@@ -48,7 +47,8 @@
     "expect.js": "^0.3.1",
     "ghooks": "^2.0.4",
     "istanbul": "^0.4.5",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "rimraf": "^2.6.2"
   },
   "config": {
     "ghooks": {
