@@ -82,8 +82,9 @@ function clicksPeriodUI(analytics) {
 
 function clicksCountriesUI(analytics) {
 
-    if (analytics.allTime.countries) {
+    try {
         let countries = analytics.allTime.countries;
+
         countries = countries.map((obj) => {
             return {
                 countries: obj.id,
@@ -91,13 +92,16 @@ function clicksCountriesUI(analytics) {
             };
         });
         return columnify(countries);
+        
+    } catch (err) {
+        return chalk.grey('COUNTRIES DATA NaN');
     }
-    return chalk.grey('COUNTRIES DATA NaN');
 }
 
 
 // Export
 export {
     summary,
-    parseSummary
+    parseSummary,
+    clicksCountriesUI
 };

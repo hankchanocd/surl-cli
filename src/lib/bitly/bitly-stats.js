@@ -18,16 +18,22 @@ function summary(response) {
     console.log(`${chalk.grey('long url:')} ${response.longUrl}`);
     console.log(`${chalk.grey('user clicks:')} ${response.userClicks}`);
     console.log(`${chalk.grey('global clicks:')} ${response.globalClicks}`);
-    console.log(`${chalk.grey('days ago:')}`);
+
     let counter = 0;
-    response.clicksByDay.forEach(obj => {
-        console.log(`  ${counter} days ago: ${obj.clicks} clicks`);
-        counter++;
-    });
-    console.log(`${chalk.grey('countries:')}`);
-    response.clicksByCountry.forEach(obj => {
-        console.log(`  ${obj.country}: ${obj.clicks}`);
-    });
+    if (response.hasOwnProperty('clicksByDay')) {
+        console.log(`${chalk.grey('days ago:')}`);
+        response.clicksByDay.forEach(obj => {
+            console.log(`  ${counter} days ago: ${obj.clicks} clicks`);
+            counter++;
+        });
+    }
+
+    if (response.hasOwnProperty('clicksByCountry')) {
+        console.log(`${chalk.grey('countries:')}`);
+        response.clicksByCountry.forEach(obj => {
+            console.log(`  ${obj.country}: ${obj.clicks}`);
+        });
+    }
 
 }
 

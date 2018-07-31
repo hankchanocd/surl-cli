@@ -22,7 +22,7 @@ function identifyAPIProvider(url) {
 // Get full date
 function fullDate(date) {
     if (typeof date !== 'number' && typeof date !== 'string') {
-        return NaN;
+        return undefined;
     }
 
     let d = new Date(date);
