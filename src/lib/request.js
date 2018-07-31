@@ -1,6 +1,6 @@
 /*
- * api.js is self-made RESTful api operation, designed for those URL shortening services
- * that don't have a proper custom API client implementation, unlike BitlyClient
+ * request.js is self-made RESTful request operation, designed for those URL shortening services
+ * that don't have a proper custom request client implementation, unlike BitlyClient
  *
  */
 
@@ -12,11 +12,11 @@ const fetch = require('node-fetch');
 
 
 // Init app
-const api = {};
+const request = {};
 
 
 // get() returns parsed json from fetch()
-api.get = async function(urlToExpand) {
+request.get = async function(urlToExpand) {
     let response = await fetch(urlToExpand);
     let body = await response.json();
 
@@ -29,7 +29,7 @@ api.get = async function(urlToExpand) {
 
 
 // post returns parsed json from fetch()
-api.post = async function(urlWithKey, urlToShorten) {
+request.post = async function(urlWithKey, urlToShorten) {
     let response = await fetch(urlWithKey, {
         method: 'POST',
         body: JSON.stringify({
@@ -53,4 +53,4 @@ api.post = async function(urlWithKey, urlToShorten) {
 
 
 // Export module
-module.exports = api;
+module.exports = request;

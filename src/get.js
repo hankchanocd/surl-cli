@@ -6,7 +6,7 @@
 
 // Dependencies
 const copy = require('clipboardy').writeSync;
-const api = require('./lib/api.js');
+const api = require('./lib/request.js');
 const bitly = require('./lib/bitly/bitly.js')();
 const googl = require('./lib/google/google.js');
 const util = require('./lib/util.js');
