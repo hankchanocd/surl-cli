@@ -4,4 +4,5 @@ node_js:
   - "node"
 
 script:
+  - npm run build
   - npm run coverage-report
