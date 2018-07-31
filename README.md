@@ -1,4 +1,4 @@
-# surl-cli  &nbsp;&nbsp;  [![Build Status](https://travis-ci.org/hankchanocd/surl-cli.svg?branch=master)](https://travis-ci.org/hankchanocd/surl-cli)
+# surl-cli  &nbsp;&nbsp;  [![Build Status](https://travis-ci.org/hankchanocd/surl-cli.svg?branch=master)](https://travis-ci.org/hankchanocd/surl-cli) &nbsp;[![Github](https://img.shields.io/github/license/hankchanocd/surl-cli.svg)](https://github.com/hankchanocd/surl-cli/blob/master/LICENSE.md) &nbsp;![Github issues](https://img.shields.io/github/issues/hankchanocd/surl-cli.svg)
 No more distraction from leaving to an URL shortening page just to create a short URL. ```surl``` is a CLI tool for shortening URL and retrieving URL's usage statistics from many API providers, including but not limited to <b>Bitly</b>, <b>Firebase</b>, and <b>Goo.gl</b>. The key advantage of <b>Firebase</b> API allows you to create links for Android and iOS apps in addition to web platform.
 
 ## Install
