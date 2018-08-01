@@ -71,7 +71,7 @@
   "config": {
     "ghooks": {
       "pre-commit": "npm run test:no-api",
-      "pre-push": "npm run test"
+      "pre-push": "npm run coverage-check"
     }
   },
   "czConfig": {

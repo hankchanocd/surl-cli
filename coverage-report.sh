@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 #!/usr/bin/env zsh
 
+# coverage-report.sh is meant to be called only after the build is successful on Travis CI
+# use coverage-show script to produce coverage summary in HTML at local machine
+# coverage-report does not build before test, as build is done by other scripts beforehand on Travis CI
+
 parse_yaml() {
    local prefix=$2
    local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
