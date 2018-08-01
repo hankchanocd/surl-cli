@@ -13,6 +13,7 @@ const expect = require('expect.js'); // expect.js provides syntatical sugar on t
 const chalk = require('chalk');
 const util = require('./../build/lib/util.js');
 const googleStats = require('./../build/lib/google/google-stats.js');
+const bitlyStats = require('./../build/lib/bitly/bitly-stats.js');
 
 
 // Holder object
@@ -72,11 +73,35 @@ const unitTest = function() {
             expect(googleStats.clicksCountriesUI({ allTime: { countries: [{ id: 'CA', count: 0 }] } })).to.contain('CA');
         });
 
-        it('Test clicksCountriesUI #5', () => {
+        it('Test clicksCountriesUI #6', () => {
             expect(googleStats.clicksCountriesUI({ allTime: { countries: [{ id: 'CA', count: 0 }] } })).to.contain(0);
+        });
+
+        it('Test clicksPeriodsUI #1', () => {
+            expect(googleStats.clicksPeriodUI({})).to.equal('');
+        });
+
+        it('Test clicksPeriodsUI #2', () => {
+            expect(googleStats.clicksPeriodUI({allTime: {}, month: {}, week: {}, day: {}, twoHours: {}})).to.contain('NaN');
+        });
+
+
+        // Test the inner strength of parseSummary
+        it('Test parseSummary returns all the required keys it promised', () => {
+            expect(googleStats.parseSummary({})).to.only.have.keys(['shortUrl', 'longUrl', 'date', 'analytics']);
         });
     });
 
+
+    // Testing bitly-stats.js
+    describe('Testing bitly-stats.js', () => {
+
+        // Test the inner strength of parseSummary
+        it('Test parseSummary to be able to throw error', () => {
+            expect(bitlyStats.parseSummary).to.throwError();
+        });
+
+    });
 
 };
 

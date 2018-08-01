@@ -115,6 +115,9 @@ const apiTest = function() {
             expect(result.clicksByCountry).to.be.a('object');
             expect(result.clicksByCountry).to.be.ok(); // testing truthiness
             expect(result.clicksByCountry[0]).to.have.key('country');
+            expect(result).to.only.have.keys(
+                ['title', 'shortUrl', 'longUrl', 'userClicks', 'globalClicks', 'clicksByDay', 'clicksByCountry']
+            );
         }).timeout(6000);
 
 
@@ -138,6 +141,9 @@ const apiTest = function() {
             expect(result.analytics).to.be.ok(); // testing truthiness/Not Null
             expect(result.analytics).to.not.be.empty(); // testing emptiness
             expect(result.analytics).to.have.keys(['allTime', 'month', 'week', 'day', 'twoHours']);
+            expect(result).to.only.have.keys(
+                ['shortUrl', 'longUrl', 'date', 'analytics']
+            );
         }).timeout(6000);
 
     });

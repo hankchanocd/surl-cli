@@ -40,19 +40,18 @@ function summary(response) {
 
 // Parse summary into digestable format for UI as well as testing
 function parseSummary(summary) {
-    let info = summary[0];
-    let longUrl = summary[1];
-    let clicks = summary[2];
-    let clicksByDay = summary[3];
-    let clicksByCountry = summary[4];
 
-    let title = '',
+    let info = summary[0],
+        longUrl = summary[1],
+        clicks = summary[2],
+        clicksByDay = summary[3],
+        clicksByCountry = summary[4],
+        title = '',
         shortUrl = '',
         userClicks = 0,
         globalClicks = 0;
 
     try {
-
         title = info.info[0].title || chalk.grey('NaN');
         shortUrl = clicks.clicks[0].short_url || chalk.grey('NaN');
         longUrl = longUrl.expand[0].long_url || chalk.grey('NaN');
@@ -62,9 +61,9 @@ function parseSummary(summary) {
         clicksByCountry = clicksByCountry.countries || [];
 
     } catch (err) {
-        console.log(chalk.red(`Parsing summary failed: ${err}`));
-        process.exit(1); // Return early, so to prevent the currupted response from being run on UI
+        console.log(chalk.redBright(`Parsing summary failed: ${err}`));
     }
+
 
     return { title, shortUrl, longUrl, userClicks, globalClicks, clicksByDay, clicksByCountry };
 }

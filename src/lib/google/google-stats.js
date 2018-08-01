@@ -54,6 +54,12 @@ function parseSummary(summary) {
 
 function clicksPeriodUI(analytics) {
 
+    if (!analytics.hasOwnProperty('allTime') || !analytics.hasOwnProperty('month') ||
+     !analytics.hasOwnProperty('week') || !analytics.hasOwnProperty('day') ||
+     !analytics.hasOwnProperty('twoHours')) {
+        return '';
+    }
+
     let period = [{
         period: 'allTime',
         shortUrl: analytics.allTime.shortUrlClicks || chalk.grey('NaN'),
@@ -103,5 +109,6 @@ function clicksCountriesUI(analytics) {
 export {
     summary,
     parseSummary,
+    clicksPeriodUI,
     clicksCountriesUI
 };
