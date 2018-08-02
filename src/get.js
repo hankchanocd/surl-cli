@@ -32,7 +32,7 @@ function expandUrl(input) {
                     result = result.expand[0].long_url;
                     // Copy to clipboard
                     copy(result);
-                    console.log(`${chalk.green('success! ' + chalk.white.underline(result) + ' copied to clipboard')}`);
+                    console.log(`${chalk.green('success! expanded url copied to clipboard ')}`);
                 })
                 .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
             return;

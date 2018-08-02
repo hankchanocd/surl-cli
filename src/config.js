@@ -1,10 +1,13 @@
 /*
  * Configuration
+ *
  */
 
 // Dependencies
 const inquirer = require('inquirer');
+const hashPartKey = require('./lib/util.js').hashPartKey;
 const chalk = require('chalk');
+const columnify = require('columnify');
 const Conf = require('conf');
 const conf = new Conf();
 
@@ -67,13 +70,35 @@ config.inquire = function inquire() {
 
 
 // Check to see if init script is being called the first time
-config.isInitCalledYet = function isInitCalledYet (conf) {
+config.isInitCalledYet = function isInitCalledYet(conf) {
 
     if (conf.get('init_run_time_counter')) {
         return true;
     } else {
         return false;
     }
+};
+
+
+// Display configurations to users while masking sensible information like keys/tokens
+config.showConfig = function showConfig() {
+
+    let defaultProvider = conf.get('defaultProvider') || chalk.gray('Null');
+    let bitlyKey = hashPartKey(conf.get('bitly_key')) || chalk.gray('Null');
+    let googleKey = hashPartKey(conf.get('google_key')) || chalk.gray('Null');
+    let firebaseKey = hashPartKey(conf.get('firebase_key')) || chalk.gray('Null');
+
+    let data = {
+        defaultProvider,
+        bitlyKey,
+        googleKey,
+        firebaseKey
+    };
+
+    console.log(columnify(data, {
+        minWidth: 15,
+        columnSplitter: ' | '
+    }));
 }
 
 

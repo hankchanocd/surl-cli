@@ -26,6 +26,7 @@ program
     .option('-r, --reverse', 'expand the shortened url')
     .option('-s, --stats', "display a shortUrl's analytics")
     .option('--rawstats', "display a shortUrl's analytics in raw data")
+    .option('--showconfig', 'show saved configuration details')
     .on('--help', function() {
         console.log();
         console.log('  Please initiate configuration for default API provider and API keys/tokens before start using surl');
@@ -67,6 +68,9 @@ program
 
         } else if (process.argv[2] === 'config') {
             config.inquire();
+
+        } else if (process.argv[2] === 'showconfig') {
+            config.showConfig();
 
         } else {
             shortenUrl(url);
