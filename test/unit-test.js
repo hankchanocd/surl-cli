@@ -46,6 +46,24 @@ const unitTest = function() {
             expect(util.fullDate({})).to.be(undefined);
         });
 
+
+        // HashPartKey
+        it('Hash part key #1', () => {
+            expect(util.hashPartKey()).to.not.be.ok();
+        });
+
+        it('Hash part key #2', () => {
+            expect(util.hashPartKey('')).to.not.be.ok();
+        });
+
+        it('Hash part key #3', () => {
+            expect(util.hashPartKey(12345678)).to.equal('1xxxxx8');
+        });
+
+        it('Hash part key #4', () => {
+            expect(util.hashPartKey(12345678)).to.be.a('string');
+        });
+
     });
 
 
