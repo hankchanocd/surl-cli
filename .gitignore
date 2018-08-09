@@ -4,3 +4,4 @@ tags
 coverage
 *.log
 .codecov.yml
+.nyc_output
