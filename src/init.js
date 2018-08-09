@@ -28,7 +28,7 @@ function inquire() {
             type: 'input',
             name: 'bitly_key',
             message: "Your bitly api key (or enter to skip)",
-            default: function() {
+            default: function () {
                 return conf.get('bitly_key');
             }
         },
@@ -36,7 +36,7 @@ function inquire() {
             type: 'input',
             name: 'firebase_key',
             message: "Your firebase api key (or enter to skip)",
-            default: function() {
+            default: function () {
                 return conf.get('firebase_key');
             }
         },
@@ -44,7 +44,7 @@ function inquire() {
             type: 'input',
             name: 'google_key',
             message: "Your google api key (or enter to skip)",
-            default: function() {
+            default: function () {
                 return conf.get('google_key');
             }
         },
@@ -54,7 +54,7 @@ function inquire() {
             message: "Finally, choose your default URL shortener api provider\n" +
                 "You can change the default later with `surl config`",
             choices: ['bitly', 'firebase', 'google'],
-            filter: function(val) {
+            filter: function (val) {
                 return val.toLowerCase();
             }
         }

@@ -17,7 +17,7 @@ const bitlyStats = require('./../build/lib/bitly/bitly-stats.js');
 
 
 // Holder object
-const unitTest = function() {
+const unitTest = function () {
 
     // Testing util.js
     describe('Testing util.js', () => {
@@ -76,23 +76,43 @@ const unitTest = function() {
         });
 
         it('Test clicksCountriesUI #2', () => {
-            expect(googleStats.clicksCountriesUI({ allTime: {} })).to.equal(chalk.grey('COUNTRIES DATA NaN'));
+            expect(googleStats.clicksCountriesUI({
+                allTime: {}
+            })).to.equal(chalk.grey('COUNTRIES DATA NaN'));
         });
 
         it('Test clicksCountriesUI #3', () => {
-            expect(googleStats.clicksCountriesUI({ allTime: '' })).to.equal(chalk.grey('COUNTRIES DATA NaN'));
+            expect(googleStats.clicksCountriesUI({
+                allTime: ''
+            })).to.equal(chalk.grey('COUNTRIES DATA NaN'));
         });
 
         it('Test clicksCountriesUI #4', () => {
-            expect(googleStats.clicksCountriesUI({ allTime: [] })).to.equal(chalk.grey('COUNTRIES DATA NaN'));
+            expect(googleStats.clicksCountriesUI({
+                allTime: []
+            })).to.equal(chalk.grey('COUNTRIES DATA NaN'));
         });
 
         it('Test clicksCountriesUI #5', () => {
-            expect(googleStats.clicksCountriesUI({ allTime: { countries: [{ id: 'CA', count: 0 }] } })).to.contain('CA');
+            expect(googleStats.clicksCountriesUI({
+                allTime: {
+                    countries: [{
+                        id: 'CA',
+                        count: 0
+                    }]
+                }
+            })).to.contain('CA');
         });
 
         it('Test clicksCountriesUI #6', () => {
-            expect(googleStats.clicksCountriesUI({ allTime: { countries: [{ id: 'CA', count: 0 }] } })).to.contain(0);
+            expect(googleStats.clicksCountriesUI({
+                allTime: {
+                    countries: [{
+                        id: 'CA',
+                        count: 0
+                    }]
+                }
+            })).to.contain(0);
         });
 
         it('Test clicksPeriodsUI #1', () => {
@@ -100,7 +120,13 @@ const unitTest = function() {
         });
 
         it('Test clicksPeriodsUI #2', () => {
-            expect(googleStats.clicksPeriodUI({allTime: {}, month: {}, week: {}, day: {}, twoHours: {}})).to.contain('NaN');
+            expect(googleStats.clicksPeriodUI({
+                allTime: {},
+                month: {},
+                week: {},
+                day: {},
+                twoHours: {}
+            })).to.contain('NaN');
         });
 
 

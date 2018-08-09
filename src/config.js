@@ -28,7 +28,7 @@ config.inquire = function inquire() {
             name: 'defaultProvider',
             message: "Change your URL shortener api provider",
             choices: ['bitly', 'firebase', 'google'],
-            filter: function(val) {
+            filter: function (val) {
                 return val.toLowerCase();
             }
         },
@@ -36,7 +36,7 @@ config.inquire = function inquire() {
             type: 'input',
             name: 'bitly_key',
             message: "Modify your bitly api key",
-            default: function() {
+            default: function () {
                 return conf.get('bitly_key');
             }
         },
@@ -44,7 +44,7 @@ config.inquire = function inquire() {
             type: 'input',
             name: 'firebase_key',
             message: "Your firebase api key (or enter to skip)",
-            default: function() {
+            default: function () {
                 return conf.get('firebase_key');
             }
         },
@@ -52,7 +52,7 @@ config.inquire = function inquire() {
             type: 'input',
             name: 'google_key',
             message: "Modify your google api key",
-            default: function() {
+            default: function () {
                 return conf.get('google_key');
             }
         }

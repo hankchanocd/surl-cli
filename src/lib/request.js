@@ -16,7 +16,7 @@ const request = {};
 
 
 // get() returns parsed json from fetch()
-request.get = async function(urlToExpand) {
+request.get = async function (urlToExpand) {
     let response = await fetch(urlToExpand);
     let body = await response.json();
 
@@ -29,7 +29,7 @@ request.get = async function(urlToExpand) {
 
 
 // post returns parsed json from fetch()
-request.post = async function(urlWithKey, urlToShorten) {
+request.post = async function (urlWithKey, urlToShorten) {
     let response = await fetch(urlWithKey, {
         method: 'POST',
         body: JSON.stringify({

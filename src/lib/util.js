@@ -1,6 +1,6 @@
-/* 
+/*
  * Utility methods
- *  
+ *
  */
 
 // Dependencies
@@ -33,7 +33,7 @@ function fullDate(date) {
 // Partly hashed key is used to for config display
 function hashPartKey(key) {
 
-    if (typeof(key) === 'undefined' || (!typeof(key) === 'string' && !typeof(key) === 'number')) {
+    if (typeof (key) === 'undefined' || (!typeof (key) === 'string' && !typeof (key) === 'number')) {
         return;
     }
     key = key.toString();

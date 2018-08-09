@@ -1,6 +1,6 @@
-/* 
+/*
  * Utility library for displaying statistics from bitly URL shortener API
- * 
+ *
  */
 
 // Dependencies
@@ -65,11 +65,19 @@ function parseSummary(summary) {
     }
 
 
-    return { title, shortUrl, longUrl, userClicks, globalClicks, clicksByDay, clicksByCountry };
+    return {
+        title,
+        shortUrl,
+        longUrl,
+        userClicks,
+        globalClicks,
+        clicksByDay,
+        clicksByCountry
+    };
 }
 
 
-// Export 
+// Export
 export {
     summary,
     parseSummary

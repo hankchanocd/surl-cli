@@ -55,8 +55,8 @@ function parseSummary(summary) {
 function clicksPeriodUI(analytics) {
 
     if (!analytics.hasOwnProperty('allTime') || !analytics.hasOwnProperty('month') ||
-     !analytics.hasOwnProperty('week') || !analytics.hasOwnProperty('day') ||
-     !analytics.hasOwnProperty('twoHours')) {
+        !analytics.hasOwnProperty('week') || !analytics.hasOwnProperty('day') ||
+        !analytics.hasOwnProperty('twoHours')) {
         return '';
     }
 
@@ -98,7 +98,7 @@ function clicksCountriesUI(analytics) {
             };
         });
         return columnify(countries);
-        
+
     } catch (err) {
         return chalk.grey('COUNTRIES DATA NaN');
     }

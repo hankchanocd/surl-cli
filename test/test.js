@@ -25,7 +25,7 @@ function test() {
 
 
     // Determine the running mode
-    const currentEnv = typeof(process.env.NODE_ENV) == 'string' ? process.env.NODE_ENV.toLowerCase() : '';
+    const currentEnv = typeof (process.env.NODE_ENV) == 'string' ? process.env.NODE_ENV.toLowerCase() : '';
 
     if (currentEnv === 'no-api') {
 

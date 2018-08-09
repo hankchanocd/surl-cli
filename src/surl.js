@@ -3,7 +3,7 @@
 'use strict';
 
 /*
- * This program is a lightweight cli tool for shortening url using various api providers, 
+ * This program is a lightweight cli tool for shortening url using various api providers,
  * including but not limited to Bitly, Firebase, and Goo.gl
  *
  */
@@ -13,7 +13,12 @@ const program = require('commander');
 const chalk = require('chalk');
 
 // Action
-const { expandUrl, shortenUrl, stats, rawStats } = require('./get');
+const {
+    expandUrl,
+    shortenUrl,
+    stats,
+    rawStats
+} = require('./get');
 const config = require('./config');
 const init = require('./init');
 
@@ -27,7 +32,7 @@ program
     .option('-s, --stats', "display a shortUrl's analytics")
     .option('--rawstats', "display a shortUrl's analytics in raw data")
     .option('--showconfig', 'show saved configuration details')
-    .on('--help', function() {
+    .on('--help', function () {
         console.log();
         console.log('  Please initiate configuration for default API provider and API keys/tokens before start using surl');
         console.log(`  ${chalk.blueBright('surl init')}`);
@@ -44,8 +49,8 @@ program
         console.log();
         console.log(`  ${chalk.blueBright('surl --stats [shortUrl]')}`);
         console.log(`  ${chalk.green(
-        '=> shortUrl: http://bit.ly/surl-cli\n' + 
-        '     origin: https://github.com/hankchanocd/surl-cli\n' + 
+        '=> shortUrl: http://bit.ly/surl-cli\n' +
+        '     origin: https://github.com/hankchanocd/surl-cli\n' +
         '     created: 2018 07 28')}`);
         console.log();
         console.log(`  If you don't know how to retrieve your API key/token from these API providers,\n` +

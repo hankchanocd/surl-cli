@@ -1,10 +1,13 @@
 /*
  * Goo.gl API related operations
- * 
+ *
  */
 
 // Dependencies
-const { summary, parseSummary } = require('./google-stats.js');
+const {
+    summary,
+    parseSummary
+} = require('./google-stats.js');
 
 // Configurations Retrieval
 const Conf = require('conf');
@@ -43,4 +46,3 @@ googl.parseSummary = parseSummary;
 
 // Export
 module.exports = googl;
-

@@ -1,10 +1,13 @@
-/* 
+/*
  * Bitly API related operations
- * 
+ *
  */
 
 // Dependencies
-const { summary, parseSummary } = require('./bitly-stats.js');
+const {
+    summary,
+    parseSummary
+} = require('./bitly-stats.js');
 const Conf = require('conf');
 const conf = new Conf();
 
@@ -13,7 +16,9 @@ const conf = new Conf();
 module.exports = function () {
 
     // Formulate a bitly client validate by a secure token
-    const { BitlyClient } = require('bitly');
+    const {
+        BitlyClient
+    } = require('bitly');
     const token = conf.get('bitly_key') || process.env.bitly_key;
     const bitly = new BitlyClient(token);
 

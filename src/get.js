@@ -25,10 +25,10 @@ function expandUrl(input) {
 
     switch (_util.identifyAPIProvider(input)) {
         case 'bitly':
-            
+
             bitly
                 .expand(input)
-                .then(function(result) {
+                .then(function (result) {
                     result = result.expand[0].long_url;
                     // Copy to clipboard
                     copy(result);
@@ -38,7 +38,7 @@ function expandUrl(input) {
             return;
 
         case 'google':
-            
+
             let url = googl.expandUrl(input);
             api.get(url)
                 .then(response => {
@@ -62,7 +62,7 @@ function shortenUrl(longUrl) {
 
             bitly
                 .shorten(longUrl)
-                .then(function(result) {
+                .then(function (result) {
                     result = result.url;
                     // Copy to clipboard
                     copy(result);
@@ -72,7 +72,7 @@ function shortenUrl(longUrl) {
             return;
 
         case 'google':
-            
+
             let urlWithKey = googl.shortenUrl();
             api.post(urlWithKey, longUrl)
                 .then(response => {
@@ -102,7 +102,7 @@ function stats(input) {
                     bitly.clicksByDay(input),
                     bitly.countries(input)
                 ])
-                .then(function(result) {
+                .then(function (result) {
                     // Display summary data
                     bitly.summary(result);
                 })
@@ -110,7 +110,7 @@ function stats(input) {
             return;
 
         case 'google': // Use self-made goo.gl API client
-            
+
             let url = googl.statsUrl(input);
             api.get(url)
                 .then(response => {
@@ -139,7 +139,7 @@ function rawStats(input) {
                     bitly.clicksByDay(input),
                     bitly.countries(input)
                 ])
-                .then(function(result) {
+                .then(function (result) {
                     // Display summary data
                     let rawData = bitly.parseSummary(result);
                     console.log(util.inspect(rawData, true, null));
@@ -148,7 +148,7 @@ function rawStats(input) {
             return;
 
         case 'google': // Use self-made goo.gl API client
-            
+
             let url = googl.statsUrl(input);
             api.get(url)
                 .then(response => {
