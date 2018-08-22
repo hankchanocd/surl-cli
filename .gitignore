@@ -5,3 +5,4 @@ coverage
 *.log
 .codecov.yml
 .nyc_output
+.vscode
