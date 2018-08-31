@@ -99,7 +99,7 @@ config.showConfig = function showConfig() {
         minWidth: 15,
         columnSplitter: ' | '
     }));
-}
+};
 
 
 // export modules

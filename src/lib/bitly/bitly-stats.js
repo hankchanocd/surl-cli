@@ -52,9 +52,9 @@ function parseSummary(summary) {
         globalClicks = 0;
 
     try {
-        title = info.info[0].title || chalk.grey('NaN');
-        shortUrl = clicks.clicks[0].short_url || chalk.grey('NaN');
-        longUrl = longUrl.expand[0].long_url || chalk.grey('NaN');
+        title = info.info[0].title || chalk.grey('Null');
+        shortUrl = clicks.clicks[0].short_url || chalk.grey('Null');
+        longUrl = longUrl.expand[0].long_url || chalk.grey('Null');
         userClicks = clicks.clicks[0].user_clicks !== 'undefined' ? clicks.clicks[0].user_clicks : 0; // Defend in case API response is currupted
         globalClicks = clicks.clicks[0].global_clicks !== 'undefined' ? clicks.clicks[0].global_clicks : 0;
         clicksByDay = clicksByDay.clicks_by_day[0].clicks || [];

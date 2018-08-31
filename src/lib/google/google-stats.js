@@ -44,9 +44,9 @@ function summary(response) {
 // Parse summary into digestable format for UI as well as for testing
 function parseSummary(summary) {
     return {
-        shortUrl: summary.id || chalk.gray('NaN'),
-        longUrl: summary.longUrl || chalk.gray('NaN'),
-        date: util.fullDate(summary.created) || chalk.gray('NaN'),
+        shortUrl: summary.id || chalk.gray('Null'),
+        longUrl: summary.longUrl || chalk.gray('Null'),
+        date: util.fullDate(summary.created) || chalk.gray('Null'),
         analytics: summary.hasOwnProperty('analytics') ? summary.analytics : false
     };
 }
