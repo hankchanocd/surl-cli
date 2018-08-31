@@ -140,8 +140,9 @@ function rawStats(input) {
                     bitly.countries(input)
                 ])
                 .then(function (result) {
-                    // Display summary data
+                    // Display raw data
                     let rawData = bitly.parseSummary(result);
+                    // Display the full object using Node's util library's inspect
                     console.log(util.inspect(rawData, true, null));
                 })
                 .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
@@ -154,6 +155,7 @@ function rawStats(input) {
                 .then(response => {
                     // Display raw data
                     let rawData = googl.parseSummary(response);
+                    // Display the full object using Node's util library's inspect
                     console.log(util.inspect(rawData, true, null));
                 })
                 .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));

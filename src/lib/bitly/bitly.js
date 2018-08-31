@@ -15,7 +15,7 @@ const conf = new Conf();
 // Export
 module.exports = function () {
 
-    // Formulate a bitly client validate by a secure token
+    // Formulate a bitly client validated by a secure token
     const {
         BitlyClient
     } = require('bitly');
