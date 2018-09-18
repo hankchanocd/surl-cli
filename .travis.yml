@@ -26,4 +26,3 @@ script:
 after_success:
   - npm run coverage-report
   - npm run semantic-release
-  - npm prune # clear modules no longer referenced/used
