@@ -5,7 +5,7 @@
  */
 
 // Dependencies
-const copy = require('clipboardy').writeSync;
+const copyToClipBoard = require('clipboardy').writeSync;
 const api = require('./lib/request.js');
 const bitly = require('./lib/bitly/bitly.js')();
 const googl = require('./lib/google/google.js');
@@ -30,8 +30,7 @@ function expandUrl(input) {
                 .expand(input)
                 .then(function (result) {
                     result = result.expand[0].long_url;
-                    // Copy to clipboard
-                    copy(result);
+                    copyToClipBoard(result);
                     console.log(`${chalk.green('success! expanded url copied to clipboard ')}`);
                 })
                 .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
@@ -42,8 +41,7 @@ function expandUrl(input) {
             let url = googl.expandUrl(input);
             api.get(url)
                 .then(response => {
-                    // Copy to clipboard
-                    copy(response.longUrl);
+                    copyToClipBoard(response.longUrl);
                     console.log(`${chalk.green('success! expanded url copied to clipboard ')}`);
                 })
                 .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
@@ -64,8 +62,7 @@ function shortenUrl(longUrl) {
                 .shorten(longUrl)
                 .then(function (result) {
                     result = result.url;
-                    // Copy to clipboard
-                    copy(result);
+                    copyToClipBoard(result);
                     console.log(`${chalk.green('success! ' + chalk.white.underline(result) + ' copied to clipboard')}`);
                 })
                 .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
@@ -77,8 +74,7 @@ function shortenUrl(longUrl) {
             api.post(urlWithKey, longUrl)
                 .then(response => {
                     let shortUrl = response.id;
-                    // Copy to clipboard
-                    copy(shortUrl);
+                    copyToClipBoard(shortUrl);
                     console.log(`${chalk.green('success! ' + chalk.white.underline(shortUrl) + ' copied to clipboard')}`);
                 })
                 .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
