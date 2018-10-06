@@ -24,7 +24,7 @@ const init = require('./init');
 
 
 program
-    .version('1.0.0', '-v, --version')
+    .version('1.3.1', '-v, --version')
     .usage('[option] [url]')
     .description(`surl shortens long urls using ${chalk.bold('Bitly API')},` +
         ` ${chalk.bold('Firebase API')}, and ${chalk.bold('goo.gl API')}`)
