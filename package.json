@@ -49,7 +49,7 @@
     "clipboardy": "^1.2.3",
     "cliui": "^4.1.0",
     "columnify": "^1.5.4",
-    "commander": "^2.17.1",
+    "commander": "^2.18.0",
     "conf": "1.4.0",
     "inquirer": "5.2.0",
     "node-fetch": "^2.2.0"
@@ -59,15 +59,15 @@
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-preset-env": "^1.7.0",
     "codecov": "^3.1.0",
-    "commitizen": "^2.10.1",
+    "commitizen": "^3.0.2",
     "cz-conventional-changelog": "^2.1.0",
     "expect.js": "^0.3.1",
     "ghooks": "^2.0.4",
     "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
     "rimraf": "^2.6.2",
-    "semantic-release": "^15.9.12",
-    "travis-deploy-once": "^5.0.7"
+    "semantic-release": "^15.9.17",
+    "travis-deploy-once": "^5.0.9"
   },
   "config": {
     "ghooks": {
