@@ -7,7 +7,7 @@
     "commit": "git-cz",
     "pretest": "npm run build",
     "test": "mocha --timeout 6000",
-    "test:no-api": "NODE_ENV=no-api npm run test  # Run tests without API tests",
+    "test:unit": "NODE_ENV=unit npm run test  # Run tests without API tests",
     "watch": "npm test -- -w",
     "prebuild": "rimraf ./build",
     "build": "babel ./src -d ./build",
@@ -71,8 +71,8 @@
   },
   "config": {
     "ghooks": {
-      "pre-commit": "npm run test:no-api",
-      "pre-push": "npm run coverage-check"
+      "pre-commit": "npm run test:unit  # No need to run full-suite test",
+      "pre-push": "npm run coverage-check  # Run `npm run test` before coverage-check"
     },
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
