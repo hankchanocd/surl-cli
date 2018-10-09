@@ -65,7 +65,8 @@ config.inquire = function inquire() {
         conf.set('google_key', answers.google_key);
 
         console.log('saved');
-    });
+        return;
+    }).catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
 };
 
 

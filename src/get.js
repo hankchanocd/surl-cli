@@ -25,30 +25,34 @@ function expandUrl(input) {
 
     switch (_util.identifyAPIProvider(input)) {
         case 'bitly':
-
-            bitly
-                .expand(input)
-                .then(function (result) {
-                    result = result.expand[0].long_url;
-                    copyToClipBoard(result);
-                    console.log(`${chalk.green('success! expanded url copied to clipboard ')}`);
-                })
-                .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
-            return;
+            {
+                return bitly
+                    .expand(input)
+                    .then(function (result) {
+                        result = result.expand[0].long_url;
+                        copyToClipBoard(result);
+                        console.log(`${chalk.green('success! expanded url copied to clipboard ')}`);
+                        return;
+                    })
+                    .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
+            }
 
         case 'google':
-
-            let url = googl.expandUrl(input);
-            api.get(url)
-                .then(response => {
-                    copyToClipBoard(response.longUrl);
-                    console.log(`${chalk.green('success! expanded url copied to clipboard ')}`);
-                })
-                .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
-            return;
+            {
+                let url = googl.expandUrl(input);
+                return api.get(url)
+                    .then(response => {
+                        copyToClipBoard(response.longUrl);
+                        console.log(`${chalk.green('success! expanded url copied to clipboard ')}`);
+                        return;
+                    })
+                    .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
+            }
 
         default:
-            return console.log(' Unable to detect provider from the link.');
+            {
+                return console.log(' Unable to detect provider from the link.');
+            }
     }
 
 }
@@ -57,31 +61,35 @@ function shortenUrl(longUrl) {
 
     switch (defaultProvider) {
         case 'bitly':
-
-            bitly
-                .shorten(longUrl)
-                .then(function (result) {
-                    result = result.url;
-                    copyToClipBoard(result);
-                    console.log(`${chalk.green('success! ' + chalk.white.underline(result) + ' copied to clipboard')}`);
-                })
-                .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
-            return;
+            {
+                return bitly
+                    .shorten(longUrl)
+                    .then(result => {
+                        result = result.url;
+                        copyToClipBoard(result);
+                        console.log(`${chalk.green('success! ' + chalk.white.underline(result) + ' copied to clipboard')}`);
+                        return;
+                    })
+                    .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
+            }
 
         case 'google':
-
-            let urlWithKey = googl.shortenUrl();
-            api.post(urlWithKey, longUrl)
-                .then(response => {
-                    let shortUrl = response.id;
-                    copyToClipBoard(shortUrl);
-                    console.log(`${chalk.green('success! ' + chalk.white.underline(shortUrl) + ' copied to clipboard')}`);
-                })
-                .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
-            return;
+            {
+                let urlWithKey = googl.shortenUrl();
+                return api.post(urlWithKey, longUrl)
+                    .then(response => {
+                        let shortUrl = response.id;
+                        copyToClipBoard(shortUrl);
+                        console.log(`${chalk.green('success! ' + chalk.white.underline(shortUrl) + ' copied to clipboard')}`);
+                        return;
+                    })
+                    .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
+            }
 
         default:
-            return console.log(' No provider is selected.');
+            {
+                return console.log(' No provider is selected.');
+            }
     }
 
 }
@@ -89,36 +97,39 @@ function shortenUrl(longUrl) {
 function stats(input) {
 
     switch (_util.identifyAPIProvider(input)) {
-        case 'bitly': // Use bitly API client
+        case 'bitly':
+            { // Use bitly API client
+                return Promise.all([
+                        bitly.info(input),
+                        bitly.expand(input),
+                        bitly.clicks(input),
+                        bitly.clicksByDay(input),
+                        bitly.countries(input)
+                    ])
+                    .then(result => {
+                        // Display summary data
+                        bitly.summary(result);
+                        return;
+                    })
+                    .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
+            }
 
-            Promise.all([
-                    bitly.info(input),
-                    bitly.expand(input),
-                    bitly.clicks(input),
-                    bitly.clicksByDay(input),
-                    bitly.countries(input)
-                ])
-                .then(function (result) {
-                    // Display summary data
-                    bitly.summary(result);
-                })
-                .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
-            return;
-
-        case 'google': // Use self-made goo.gl API client
-
-            let url = googl.statsUrl(input);
-            api.get(url)
-                .then(response => {
-                    // Display summary data
-                    googl.summary(response);
-                })
-                .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
-            return;
+        case 'google':
+            { // Use self-made goo.gl API client
+                let url = googl.statsUrl(input);
+                return api.get(url)
+                    .then(response => {
+                        // Display summary data
+                        googl.summary(response);
+                        return;
+                    })
+                    .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
+            }
 
         default:
-            return console.log(' Unable to detect provider from the link.');
-
+            {
+                return console.log(' Unable to detect provider from the link.');
+            }
     }
 
 }
@@ -126,38 +137,42 @@ function stats(input) {
 function rawStats(input) {
 
     switch (_util.identifyAPIProvider(input)) {
-        case 'bitly': // Use bitly API client
+        case 'bitly':
+            { // Use bitly API client
+                return Promise.all([
+                        bitly.info(input),
+                        bitly.expand(input),
+                        bitly.clicks(input),
+                        bitly.clicksByDay(input),
+                        bitly.countries(input)
+                    ])
+                    .then(function (result) {
+                        let rawDataObj = bitly.parseSummary(result);
+                        // Display the full object using util's inspect
+                        console.log(util.inspect(rawDataObj, true, null));
+                        return;
+                    })
+                    .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
 
-            Promise.all([
-                    bitly.info(input),
-                    bitly.expand(input),
-                    bitly.clicks(input),
-                    bitly.clicksByDay(input),
-                    bitly.countries(input)
-                ])
-                .then(function (result) {
-                    let rawDataObj = bitly.parseSummary(result);
-                    // Display the full object using util's inspect
-                    console.log(util.inspect(rawDataObj, true, null));
-                })
-                .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
-            return;
+            }
 
-        case 'google': // Use self-made goo.gl API client
-
-            let url = googl.statsUrl(input);
-            api.get(url)
-                .then(response => {
-                    let rawDataObj = googl.parseSummary(response);
-                    // Display the full object using util's inspect
-                    console.log(util.inspect(rawDataObj, true, null));
-                })
-                .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
-            return;
+        case 'google':
+            { // Use self-made goo.gl API client
+                let url = googl.statsUrl(input);
+                return api.get(url)
+                    .then(response => {
+                        let rawDataObj = googl.parseSummary(response);
+                        // Display the full object using util's inspect
+                        console.log(util.inspect(rawDataObj, true, null));
+                        return;
+                    })
+                    .catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
+            }
 
         default:
-            return console.log(' Unable to detect provider from the link.');
-
+            {
+                return console.log(' Unable to detect provider from the link.');
+            }
     }
 
 }

@@ -67,7 +67,8 @@ function inquire() {
         conf.set('defaultProvider', answers.defaultProvider);
 
         console.log('saved');
-    });
+        return;
+    }).catch(err => console.log(chalk.redBright(`ERROR: ${err.message}`)));
 }
 
 
