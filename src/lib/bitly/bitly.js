@@ -2,6 +2,7 @@
  * Bitly API related operations
  *
  */
+'use strict';
 
 // Dependencies
 const {

@@ -2,6 +2,7 @@
  * Goo.gl API related operations
  *
  */
+'use strict';
 
 // Dependencies
 const {

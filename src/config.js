@@ -2,6 +2,7 @@
  * Configuration
  *
  */
+'use strict';
 
 // Dependencies
 const inquirer = require('inquirer');

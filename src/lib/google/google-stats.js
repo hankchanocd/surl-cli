@@ -2,6 +2,7 @@
  * Utility library for displaying statistics from google URL shortener API
  *
  */
+'use strict';
 
 // Dependencies
 const util = require('../util.js');

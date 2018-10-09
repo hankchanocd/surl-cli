@@ -2,6 +2,7 @@
  * Utility library for displaying statistics from bitly URL shortener API
  *
  */
+'use strict';
 
 // Dependencies
 const chalk = require('chalk');

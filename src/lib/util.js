@@ -2,8 +2,7 @@
  * Utility methods
  *
  */
-
-// Dependencies
+'use strict';
 
 
 // Identify API provider
@@ -30,7 +29,7 @@ function fullDate(date) {
 }
 
 
-// Partly hashed key is used to for config display
+// Partly hashed key is used for config display
 function hashPartKey(key) {
 
     if (typeof (key) === 'undefined' || (!typeof (key) === 'string' && !typeof (key) === 'number')) {

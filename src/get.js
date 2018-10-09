@@ -3,6 +3,7 @@
  * and goo.gl API
  *
  */
+'use strict';
 
 // Dependencies
 const copyToClipBoard = require('clipboardy').writeSync;

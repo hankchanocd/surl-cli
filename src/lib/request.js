@@ -3,6 +3,7 @@
  * that don't have a proper custom request client implementation, unlike BitlyClient
  *
  */
+'use strict';
 
 /* Jshint doesn't support es8 features yet */
 /* jshint ignore:start */

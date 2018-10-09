@@ -2,6 +2,7 @@
  * Initiate configuration, usually the first step when users start to use `surl`
  *
  */
+'use strict';
 
 // Dependencies
 const inquirer = require('inquirer');
