@@ -1,0 +1,17 @@
+# Default
+tags
+*.log
+
+# Text Editor
+.vscode
+
+# npm
+node_modules
+
+# Babel
+build/
+
+# CodeCov
+coverage/
+.codecov.yml
+.nyc_output
