@@ -59,6 +59,8 @@ program
     })
     .action((url, options) => {
 
+        if (!options) return; // Return helper if no options is provided
+
         if (options.reverse) {
             expandUrl(url);
 
