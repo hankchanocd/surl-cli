@@ -14,9 +14,9 @@
     "eslint:show": "npm run eslint:makeHtml && open ./eslint/report.html",
     "prebuild": "rimraf ./build",
     "build": "babel ./src -d ./build",
-    "coverage-check": "istanbul cover -x *.test.js _mocha -- -R spec test/test.js",
-    "coverage-show": "npm run coverage-check && open coverage/lcov-report/index.html",
-    "coverage-report": "script/coverage-report.sh",
+    "coverage:check": "istanbul cover -x *.test.js _mocha -- -R spec test/test.js",
+    "coverage:show": "npm run coverage:check && open coverage/lcov-report/index.html",
+    "coverage:report": "script/coverage-report.sh",
     "semantic-release": "semantic-release  # This is meant to run on Travis only",
     "travis-deploy-once": "travis-deploy-once  # This is meant to run on Travis only"
   },
@@ -78,7 +78,7 @@
   "config": {
     "ghooks": {
       "pre-commit": "npm run test:unit  # No need to run full-suite test",
-      "pre-push": "npm run coverage-check  # Run `npm run test` before coverage-check"
+      "pre-push": "npm run coverage:check  # Run `npm run test` before coverage-check"
     },
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
