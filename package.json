@@ -9,7 +9,7 @@
     "test": "mocha --timeout 6000 && npm run eslint",
     "test:unit": "NODE_ENV=unit npm run test  # Run tests without API tests",
     "watch": "npm test -- -w",
-    "eslint": "eslint . --ignore-path .gitignore",
+    "eslint": "eslint . --ignore-path .gitignore --cache --cache-location \"./eslint/.eslintcache\" ",
     "prebuild": "rimraf ./build",
     "build": "babel ./src -d ./build",
     "coverage-check": "istanbul cover -x *.test.js _mocha -- -R spec test/test.js",
