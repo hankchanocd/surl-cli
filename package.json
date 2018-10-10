@@ -2,7 +2,7 @@
   "name": "surl-cli",
   "version": "0.0.0-semantically-released",
   "description": "URL shortener CLI",
-  "main": "src/surl.js",
+  "main": "build/surl.js",
   "scripts": {
     "commit": "git-cz",
     "pretest": "npm run build",
