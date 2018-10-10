@@ -5,15 +5,16 @@
   "main": "build/surl.js",
   "scripts": {
     "commit": "git-cz",
-    "pretest": "npm run build",
-    "test": "npm run eslint & mocha --timeout 6000",
-    "test:unit": "NODE_ENV=unit npm run test  # Run tests without API tests",
+    "pretest": "npm run build:quiet --silent",
+    "test": "npm run eslint --silent & mocha --timeout 6000",
+    "test:unit": "NODE_ENV=unit npm run test --silent # Run tests without API tests",
     "watch": "npm test -- -w",
     "eslint": "eslint . --ignore-path .gitignore --cache --cache-location \"./eslint/.eslintcache\" ",
     "eslint:makeHtml": "npm run eslint -- --format html -o ./eslint/report.html",
     "eslint:show": "npm run eslint:makeHtml && open ./eslint/report.html",
     "prebuild": "rimraf ./build",
     "build": "babel ./src -d ./build",
+    "build:quiet": "npm run build -- --quiet  # Run babel in quiet mode",
     "coverage:check": "istanbul cover -x *.test.js _mocha -- -R spec test/test.js",
     "coverage:show": "npm run coverage:check && open coverage/lcov-report/index.html",
     "coverage:report": "script/coverage-report.sh",
@@ -78,7 +79,7 @@
   "config": {
     "ghooks": {
       "pre-commit": "npm run test:unit  # No need to run full-suite test",
-      "pre-push": "npm run coverage:check  # Run `npm run test` before coverage-check"
+      "pre-push": "npm run coverage:check --silent # Run `npm run test` before coverage-check"
     },
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
