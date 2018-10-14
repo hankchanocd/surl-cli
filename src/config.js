@@ -36,7 +36,7 @@ config.inquire = function inquire() {
         {
             type: 'input',
             name: 'bitly_key',
-            message: "Modify your bitly api key",
+            message: "Modify your bitly auth token",
             default: function () {
                 return conf.get('bitly_key');
             }
@@ -44,7 +44,7 @@ config.inquire = function inquire() {
         {
             type: 'input',
             name: 'firebase_key',
-            message: "Your firebase api key (or enter to skip)",
+            message: "Your firebase auth token (or enter to skip)",
             default: function () {
                 return conf.get('firebase_key');
             }

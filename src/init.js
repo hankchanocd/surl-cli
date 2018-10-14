@@ -28,7 +28,7 @@ function inquire() {
     let questions = [{
             type: 'input',
             name: 'bitly_key',
-            message: "Your bitly api key (or enter to skip)",
+            message: "Your bitly auth token (or enter to skip)",
             default: function () {
                 return conf.get('bitly_key');
             }
@@ -36,7 +36,7 @@ function inquire() {
         {
             type: 'input',
             name: 'firebase_key',
-            message: "Your firebase api key (or enter to skip)",
+            message: "Your firebase auth token (or enter to skip)",
             default: function () {
                 return conf.get('firebase_key');
             }
