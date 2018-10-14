@@ -26,6 +26,9 @@
   "bin": {
     "surl": "./build/surl.js"
   },
+  "engines": {
+    "node": ">=8"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/hankchanocd/surl-cli.git"
