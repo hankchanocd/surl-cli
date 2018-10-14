@@ -17,7 +17,7 @@
     "prebuild": "rimraf ./build",
     "build": "babel ./src -d ./build",
     "build:quiet": "npm run build -- --quiet  # Run babel in quiet mode",
-    "coverage:check": "istanbul cover -x *.test.js _mocha -- -R spec test/test.js",
+    "coverage:check": "istanbul cover -x \"*.test.js\" _mocha -- -R spec test/test.js",
     "coverage:open": "npm run coverage:check && opn coverage/lcov-report/index.html",
     "coverage:report": "script/coverage-report.sh",
     "semantic-release": "semantic-release  # This is meant to run on Travis only",
