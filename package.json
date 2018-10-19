@@ -2,7 +2,7 @@
   "name": "surl-cli",
   "version": "0.0.0-semantically-released",
   "description": "URL shortener CLI",
-  "main": "build/surl.js",
+  "main": "index.js",
   "scripts": {
     "commit": "git-cz",
     "pretest": "npm run build:quiet --silent",
@@ -24,7 +24,7 @@
     "travis-deploy-once": "travis-deploy-once  # This is meant to run on Travis only"
   },
   "bin": {
-    "surl": "./build/surl.js"
+    "surl": "./bin/surl.js"
   },
   "engines": {
     "node": ">=8"
