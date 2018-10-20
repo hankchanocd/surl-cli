@@ -1,8 +1,8 @@
-# surl-cli  &nbsp;&nbsp;  ![npm](https://img.shields.io/npm/v/surl-cli.svg)  [![Build Status](https://travis-ci.org/hankchanocd/surl-cli.svg?branch=master)](https://travis-ci.org/hankchanocd/surl-cli)  [![Known Vulnerabilities](https://snyk.io/test/github/hankchanocd/surl-cli/badge.svg?targetFile=package.json)](https://snyk.io/test/github/hankchanocd/surl-cli?targetFile=package.json)  ![Github issues](https://img.shields.io/github/issues/hankchanocd/surl-cli.svg)
+# surl-cli &nbsp;&nbsp; [![npm](https://img.shields.io/npm/v/surl-cli.svg)](https://www.npmjs.com/package/surl-cli) [![Build Status](https://travis-ci.org/hankchanocd/surl-cli.svg?branch=master)](https://travis-ci.org/hankchanocd/surl-cli) [![Known Vulnerabilities](https://snyk.io/test/github/hankchanocd/surl-cli/badge.svg?targetFile=package.json)](https://snyk.io/test/github/hankchanocd/surl-cli?targetFile=package.json) ![Github issues](https://img.shields.io/github/issues/hankchanocd/surl-cli.svg)
 
 > CLI for shortening URL with **Firebase**, **Bitly**, **Goo.gl** API.
 
-No more distraction from leaving to a web page just to create a short URL. ```surl``` is a CLI tool for shortening URL and retrieving URL's usage statistics from many API providers, including but not limited to **Bitly**, **Firebase**, and **Goo.gl**. The key advantage of **Firebase** API allows you to create links for Android and iOS apps in addition to web platform.
+No more distraction from leaving to a web page just to create a short URL. `surl` is a CLI tool for shortening URL and retrieving URL's usage statistics from many API providers, including but not limited to **Bitly**, **Firebase**, and **Goo.gl**. The key advantage of **Firebase** API allows you to create links for Android and iOS apps in addition to web platform.
 
 ## Install
 
@@ -14,7 +14,7 @@ $ npm install surl-cli -g
 
 ### Init
 
-Before start using ```surl```, initialize configuration with ```surl init``` to select a default API provider. You must save at least one API key/token to ```surl``` from one of the three API providers (Bitly, Firebase, Goo.gl). While you can choose to store every API keys/tokens from all three service providers, ```surl``` only allows the default provider to be used at one time.
+Before start using `surl`, initialize configuration with `surl init` to select a default API provider. You must save at least one API key/token to `surl` from one of the three API providers (Bitly, Firebase, Goo.gl). While you can choose to store every API keys/tokens from all three service providers, `surl` only allows the default provider to be used at one time.
 
 - Follow the [guide](./bitly.md) to go to **Bitly**'s API page to receive your API key/token.
 - Follow the [guide](./firebase.md) to go to **Firebase (FDB)**'s API page to receive your API key/token.
@@ -29,6 +29,7 @@ $ surl init
 ### Config
 
 Update your API key/token and change the default API provider after `surl init`
+
 ```
 $ surl config
 ```
@@ -50,6 +51,7 @@ $ surl --reverse goo.gl   (or)   surl -r goo.gl
 ### Stats
 
 Fetch shortened URL's meta data and usage statistics, available only if the chosen provider has such feature.
+
 ```
 $ surl --stats goo.gl
 => shortUrl: goo.gl
@@ -67,17 +69,18 @@ $ surl --stats goo.gl
 ### Help
 
 Should you have any doubt, refer to help page.
+
 ```
 $ surl --help
 ```
 
 ## Tests
 
-To run unit tests and API tests, run ```npm test```.
+To run unit tests and API tests, run `npm test`.
 
 ## Contributing
 
-Development of ```surl``` now focuses on transforming URLs. Any other suggestions are welcomed, but will have to wait until the next major release.
+Development of `surl` now focuses on transforming URLs. Any other suggestions are welcomed, but will have to wait until the next major release.
 For more details, please refer to [Contribution](./CONTRIBUTION.md).
 
 ## FAQ
