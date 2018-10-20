@@ -18,9 +18,9 @@ const {
     shortenUrl,
     stats,
     rawStats
-} = require('./get');
-const config = require('./config');
-const init = require('./init');
+} = require('../build/get');
+const config = require('../build/config');
+const init = require('../build/init');
 
 
 program

@@ -19,6 +19,7 @@ const bitly = require("./../build/lib/bitly/bitly.js")();
 
 // Holder object
 const apiTest = function () {
+
     // Test REST API get methods
     describe("surl -r [shortUrl] (expand url)", () => {
         // Testing bitly
@@ -51,6 +52,7 @@ const apiTest = function () {
             );
         }).timeout(6000);
     });
+
 
     // Test REST API post methods
     describe("surl [longUrl] (shorten url)", () => {
@@ -85,6 +87,7 @@ const apiTest = function () {
             expect(result.id).to.equal("https://goo.gl/cL3Txj");
         }).timeout(6000);
     });
+
 
     // Test the data integrity of usage statistics
     describe("surl --stats [shortUrl] (usage statistics)", () => {
