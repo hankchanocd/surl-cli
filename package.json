@@ -44,7 +44,8 @@
   ],
   "files": [
     "build",
-    "README.md"
+    "README.md",
+    "bin/"
   ],
   "author": "Hank Chan <hankchanth@icloud.com> (https://github.com/hankchanocd)",
   "license": "MIT",
