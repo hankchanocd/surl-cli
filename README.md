@@ -1,4 +1,7 @@
-# surl-cli &nbsp;&nbsp; [![npm](https://img.shields.io/npm/v/surl-cli.svg)](https://www.npmjs.com/package/surl-cli) [![Build Status](https://travis-ci.org/hankchanocd/surl-cli.svg?branch=master)](https://travis-ci.org/hankchanocd/surl-cli) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![Known Vulnerabilities](https://snyk.io/test/github/hankchanocd/surl-cli/badge.svg?targetFile=package.json)](https://snyk.io/test/github/hankchanocd/surl-cli?targetFile=package.json) ![Github issues](https://img.shields.io/github/issues/hankchanocd/surl-cli.svg)
+# surl-cli
+[![npm](https://img.shields.io/npm/v/surl-cli.svg)](https://www.npmjs.com/package/surl-cli) [![David](https://img.shields.io/david/hankchanocd/surl-cli.svg)](https://david-dm.org) [![David](https://img.shields.io/david/dev/hankchanocd/surl-cli.svg)](https://david-dm.org)
+
+[![Build Status](https://travis-ci.org/hankchanocd/surl-cli.svg?branch=master)](https://travis-ci.org/hankchanocd/surl-cli) ![Github issues](https://img.shields.io/github/issues/hankchanocd/surl-cli.svg) [![Known Vulnerabilities](https://snyk.io/test/github/hankchanocd/surl-cli/badge.svg?targetFile=package.json)](https://snyk.io/test/github/hankchanocd/surl-cli?targetFile=package.json) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 > CLI for shortening URL with **Firebase**, **Bitly**, **Goo.gl** API.
 
